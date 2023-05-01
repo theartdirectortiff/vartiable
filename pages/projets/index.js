@@ -16,7 +16,7 @@ function Scene({ objref }) {
 
   return (
     <>
-      <ambientLight intensity={0.35} />
+      <ambientLight intensity={0.65} />
       <primitive
         ref={objref}
         scale={[1.5, 1.5, 1.5]}

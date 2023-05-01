@@ -9,6 +9,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+import localFont from "next/font/local";
+const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+
 export default function Index({ allPosts, pageContent, allServices, preview }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderWidth = 30;
@@ -25,20 +28,24 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <Head>
         <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
       </Head>
-      <section className="py-48">
+      <section className="h-screen flex items-center">
         <Container>
           <div className="text-center">
             <span className="opacity-50">
               {pageContent.story.content.TeaserSpan}
             </span>
-            <h1 className="text-tournesol text-[8vw] uppercase leading-tight">
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-tournesol text-[6vw] uppercase leading-tight font-medium"
+            >
               {pageContent.story.content.TeaserText}
-            </h1>
+            </motion.h1>
           </div>
         </Container>
       </section>
       <section>
-        <video autoPlay muted autoplay playsInline loop>
+        <video autoPlay muted playsInline loop>
           <source
             src="https://vartiable.com/video/vartiable4.mp4"
             type="video/mp4"
@@ -48,7 +55,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <section className="py-32">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="text-tournesol text-6xl uppercase">
+            <h2 className="text-tournesol text-6xl uppercase leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
             <div>
@@ -67,12 +74,12 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               style={{ x: -currentIndex * sliderWidth }}
             >
               {allPosts.stories.map((stry, idx) => (
-                <motion.div>
+                <motion.div className="min-w-[30vw] max-w-[30vw] rounded-md overflow-hidden">
                   <Link href={stry.full_slug} key={idx}>
                     <img
                       key={idx}
                       src={stry.content.ProjectThumbnail}
-                      className="w-[30vw] rounded-md bg-white"
+                      className="w-full h-full object-cover"
                     />
                   </Link>
                 </motion.div>
@@ -83,20 +90,33 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       </section>
       <section className="py-32">
         <Container>
-          <h1 className="text-tournesol text-center text-[5vw] uppercase">
-            Crafting Creative Solutions
+          <h1 className="text-tournesol text-center text-[6vw] uppercase  leading-tight">
+            {pageContent.story.content.ServiceSectionTitle}
           </h1>
         </Container>
         <div className="pt-20">
+          <Container>
+            <div
+              className={`${courierNew.className} flex justify-between py-3 opacity-50 uppercase`}
+            >
+              <div className="flex items-center gap-8">
+                <span>Idx</span>
+                <span>Service</span>
+              </div>
+
+              <span>Check it out</span>
+            </div>
+          </Container>
           {allServices.stories.map((srvc, idx) => (
             <div
               key={srvc.name + idx}
-              className="w-full items-center py-4 border-y border-y-gray-600"
+              className="w-full items-center py-4 border-y border-y-gray-600 -mt-[1px] relative group"
             >
+              <div className="absolute bottom-0 z-0 w-full h-0 bg-tournesol group-hover:h-full transition-all duration-200"></div>
               <Container>
                 <Link href={srvc.full_slug} className="flex justify-between">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-6xl">{idx + 1}</h2>
+                  <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
+                    <h2 className="text-5xl font-bold">{idx + 1}</h2>
                     <h3 className="text-4xl uppercase">{srvc.content.Title}</h3>
                   </div>
                   <svg
@@ -117,10 +137,39 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
         </div>
       </section>
       <Container>
-        <footer className="bg-zinc-900 rounded-tl-xl rounded-tr-xl py-32">
-          <h1 className="text-tournesol text-center text-[5vw] uppercase">
-            Designing Your Success Story
+        <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
+          <div
+            className={`${courierNew.className} text-black grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
+          >
+            <div className="flex flex-col">
+              <span>Instagram</span>
+              <span>LinkedIn</span>
+              <span>Spotify</span>
+            </div>
+            <span className="text-center">
+              Rte de la Fonderie 2, 1700 Fribourg
+            </span>
+            <div className="flex flex-col text-right">
+              <span>bonjour@vartiable.com</span>
+              <span>0791571767</span>
+            </div>
+          </div>
+          <h1 className="text-black text-center font-semibold text-[5vw] uppercase leading-tight w-5/6 m-auto">
+            {pageContent.story.content.FooterSectionTitle}
           </h1>
+          <div className="w-2/4 m-auto mt-10 rounded-tl-3xl rounded-tr-3xl overflow-hidden relative flex justify-center">
+            <img
+              src={pageContent.story.content.FooterSectionImage.filename}
+              alt=""
+              className="w-full grayscale"
+            />
+            <Link
+              className="absolute bottom-10 px-4 py-1 bg-white text-midnight rounded-full"
+              href="/contact"
+            >
+              Let's have a chat!
+            </Link>
+          </div>
         </footer>
       </Container>
     </>
