@@ -16,8 +16,8 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderWidth = 30;
   const dragConstraints = {
-    left: 0,
-    right: (allPosts.stories.length - 1) * sliderWidth,
+    right: 0,
+    letf: (allPosts.stories.length - 1) * sliderWidth,
   };
 
   const handleDrag = (event, info) => {
@@ -66,24 +66,30 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
             </div>
           </div>
           <div className="pt-20">
-            <motion.div
-              className="flex gap-4 cursor-grab"
-              drag="x"
-              dragConstraints={dragConstraints}
-              onDrag={handleDrag}
-              style={{ x: -currentIndex * sliderWidth }}
-            >
-              {allPosts.stories.map((stry, idx) => (
-                <motion.div className="min-w-[30vw] max-w-[30vw] rounded-md overflow-hidden">
-                  <Link href={stry.full_slug} key={idx}>
-                    <img
+            <motion.div className="cursor-grab">
+              <motion.div
+                drag="x"
+                dragConstraints={dragConstraints}
+                // onDrag={handleDrag}
+                // style={{ x: -currentIndex * sliderWidth }}
+                className="flex gap-4"
+              >
+                {allPosts.stories.map((stry, idx) => (
+                  <motion.div className="min-w-[300px] max-w-[300px] md:min-w-[500px] md:max-w-[500px] rounded-md overflow-hidden">
+                    <Link
+                      href={stry.full_slug}
                       key={idx}
-                      src={stry.content.ProjectThumbnail}
-                      className="w-full h-full object-cover"
-                    />
-                  </Link>
-                </motion.div>
-              ))}
+                      className="pointer-events-none select-none"
+                    >
+                      <img
+                        key={idx}
+                        src={stry.content.ProjectThumbnail}
+                        className="w-full h-full object-cover"
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
         </Container>
