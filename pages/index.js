@@ -55,7 +55,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <section className="py-32 w-screen overflow-hidden">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="text-tournesol text-6xl uppercase leading-tight">
+            <h2 className="text-tournesol text-2xl md:text-6xl uppercase leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
             <div>
