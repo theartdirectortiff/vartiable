@@ -11,6 +11,7 @@ import { useState } from "react";
 
 import localFont from "next/font/local";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
 
 export default function Index({ allPosts, pageContent, allServices, preview }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,16 +29,21 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <Head>
         <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
       </Head>
-      <section className="h-screen flex items-center">
+      <section className="h-screen flex items-center relative">
+        <img
+          src="https://images.unsplash.com/photo-1668455199701-284281127a87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80"
+          className="absolute w-screen h-screen z-0"
+          alt=""
+        />
         <Container>
-          <div className="text-center">
-            <span className="opacity-50">
+          <div className="relative">
+            {/* <span className="opacity-50">
               {pageContent.story.content.TeaserSpan}
-            </span>
+            </span> */}
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="dark:text-tournesol text-romance text-[6vw] uppercase leading-tight font-bold"
+              className={`${clashDisplay.className} dark:text-white text-romance text-[7vw] leading-tight font-bold`}
             >
               {pageContent.story.content.TeaserText}
             </motion.h1>

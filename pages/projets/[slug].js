@@ -114,7 +114,7 @@ export default function Post({ post, preview }) {
                 </h1>
                 <div className="w-2/4 m-auto mt-10 rounded-tl-3xl rounded-tr-3xl overflow-hidden relative flex justify-center">
                   <img
-                    src={post.content.FooterSectionImage}
+                    src={post.content.FooterSectionImage.filename}
                     alt=""
                     className="w-full grayscale"
                   />
