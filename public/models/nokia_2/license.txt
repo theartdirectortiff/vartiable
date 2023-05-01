@@ -1,0 +1,11 @@
+Model Information:
+* title:	Nokia 3310 LowPoly
+* source:	https://sketchfab.com/3d-models/nokia-3310-lowpoly-bed87049026640a59f3f8b5844614253
+* author:	sMoKi (https://sketchfab.com/SevKa)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Nokia 3310 LowPoly" (https://sketchfab.com/3d-models/nokia-3310-lowpoly-bed87049026640a59f3f8b5844614253) by sMoKi (https://sketchfab.com/SevKa) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
