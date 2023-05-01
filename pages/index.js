@@ -51,9 +51,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
         </Container>
       </section>
       <section>
-        <video autoPlay muted playsInline loop>
+        <video className="w-screen" autoPlay muted playsInline loop>
           <source
-            src="https://vartiable.com/video/vartiable4.mp4"
+            src={pageContent.story.content.Video.filename}
             type="video/mp4"
           ></source>
         </video>
