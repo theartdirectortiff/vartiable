@@ -52,7 +52,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           ></source>
         </video>
       </section>
-      <section className="py-32">
+      <section className="py-32 w-screen overflow-hidden">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
             <h2 className="text-tournesol text-6xl uppercase leading-tight">
