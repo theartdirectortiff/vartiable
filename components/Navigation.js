@@ -43,14 +43,38 @@ export default function Navigation() {
               <Music />
             </button>
             <button
-              className="px-4 py-1 bg-white text-midnight rounded-full flex"
+              className="px-1 py-1 bg-white text-midnight rounded-full flex gap-1 items-center"
               onClick={() => setTheme(theme == "light" ? "dark" : "light")}
             >
-              <Sun />
-              Switch
               <Moon />
+              <div className="w-10 rounded-full border border-gray-200 relative">
+                <motion.div
+                  animate={theme === "dark" ? "open" : "closed"}
+                  initial="closed"
+                  variants={{
+                    open: {
+                      x: 0,
+                      transition: {
+                        animationDelay: 1,
+                        type: "tween",
+                        ease: [0.4, 0, 0.2, 1],
+                      },
+                    },
+                    closed: {
+                      x: "100%",
+                      transition: {
+                        type: "tween",
+                        ease: [0.4, 0, 0.2, 1],
+                      },
+                    },
+                  }}
+                  className="w-4 h-4 m-[2px] rounded-full bg-midnight"
+                ></motion.div>
+              </div>
+
+              <Sun />
             </button>
-            <button className="px-4 py-1 bg-white text-midnight rounded-full">
+            <button className="px-4 py-1 bg-white text-midnight rounded-full hidden md:block">
               Fr / En
             </button>
             <motion.button

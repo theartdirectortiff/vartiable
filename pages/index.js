@@ -37,7 +37,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-tournesol text-[6vw] uppercase leading-tight font-medium"
+              className="dark:text-tournesol text-romance text-[6vw] uppercase leading-tight font-bold"
             >
               {pageContent.story.content.TeaserText}
             </motion.h1>
@@ -55,7 +55,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <section className="py-32 w-screen overflow-hidden">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="text-tournesol text-2xl md:text-6xl uppercase leading-tight">
+            <h2 className="dark:text-tournesol text-romance text-2xl md:text-6xl uppercase leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
             <div>
@@ -79,7 +79,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                     <Link
                       href={stry.full_slug}
                       key={idx}
-                      className="pointer-events-none select-none"
+                      className="select-none pointer-events-none"
                     >
                       <img
                         key={idx}
@@ -96,7 +96,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       </section>
       <section className="py-32">
         <Container>
-          <h1 className="text-tournesol text-center text-[6vw] uppercase  leading-tight">
+          <h1 className="dark:text-tournesol text-romance text-center text-[6vw] uppercase  leading-tight">
             {pageContent.story.content.ServiceSectionTitle}
           </h1>
         </Container>
@@ -118,12 +118,14 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               key={srvc.name + idx}
               className="w-full items-center py-4 border-y border-y-gray-600 -mt-[1px] relative group"
             >
-              <div className="absolute bottom-0 z-0 w-full h-0 bg-tournesol group-hover:h-full transition-all duration-200"></div>
+              <div className="absolute bottom-0 z-0 w-full h-0 dark:bg-tournesol bg-romance group-hover:h-full transition-all duration-200"></div>
               <Container>
                 <Link href={srvc.full_slug} className="flex justify-between">
                   <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
                     <h2 className="text-5xl font-bold">{idx + 1}</h2>
-                    <h3 className="text-4xl uppercase">{srvc.content.Title}</h3>
+                    <h3 className="md:text-[2vw] text-2xl uppercase">
+                      {srvc.content.Title}
+                    </h3>
                   </div>
                   <svg
                     width="40"
@@ -142,8 +144,8 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           ))}
         </div>
       </section>
-      <Container>
-        <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
+      <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
+        <Container>
           <div
             className={`${courierNew.className} text-black grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
           >
@@ -176,8 +178,8 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               Let's have a chat!
             </Link>
           </div>
-        </footer>
-      </Container>
+        </Container>
+      </footer>
     </>
   );
 }

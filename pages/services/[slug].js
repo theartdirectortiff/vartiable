@@ -29,7 +29,7 @@ export default function Post({ post, preview }) {
             <section className="h-screen">
               <Container>
                 <div className="flex flex-col justify-between h-screen py-32">
-                  <h1 className="text-[#78DD29] dark:text-tournesol text-6xl uppercase">
+                  <h1 className="text-romance dark:text-tournesol text-6xl uppercase">
                     {post.content.Title}
                   </h1>
                   <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
@@ -54,7 +54,7 @@ export default function Post({ post, preview }) {
             <section className="py-32">
               <Container>
                 <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
-                  <h2 className="text-[#78DD29] dark:text-tournesol text-6xl uppercase">
+                  <h2 className="text-romance dark:text-tournesol text-6xl uppercase">
                     Our purpose
                   </h2>
                   <div>

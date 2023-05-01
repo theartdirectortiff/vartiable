@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         tournesol: "#fff741",
         midnight: "#101010",
+        romance: "#B1004E",
       },
     },
   },
