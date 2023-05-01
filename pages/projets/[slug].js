@@ -91,10 +91,10 @@ export default function Post({ post, preview }) {
                 </div>
               </div>
             </Container>
-            <Container>
-              <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
+            <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
+              <Container>
                 <div
-                  className={`${courierNew.className} text-black grid grid-cols-3 gap-32 p-10 opacity-50 uppercase`}
+                  className={`${courierNew.className} text-black grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
                 >
                   <div className="flex flex-col">
                     <span>Instagram</span>
@@ -125,8 +125,8 @@ export default function Post({ post, preview }) {
                     Let's have a chat!
                   </Link>
                 </div>
-              </footer>
-            </Container>
+              </Container>
+            </footer>
           </article>
           {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </>

@@ -79,7 +79,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                     <Link
                       href={stry.full_slug}
                       key={idx}
-                      className="select-none pointer-events-none"
+                      // className="select-none pointer-events-none"
                     >
                       <img
                         key={idx}

@@ -17,12 +17,7 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider defaultTheme="dark">
       {loader ? (
         <div className="w-screen h-screen fixed top-0 left-0 bg-tournesol flex flex-col gap-8 items-center justify-center">
-          <img className="w-48 h-48 bg-green-500 rounded-lg" src="" alt="" />
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "200px" }}
-            className="h-2 bg-green-500"
-          ></motion.div>
+          Hey Life
         </div>
       ) : (
         <>
