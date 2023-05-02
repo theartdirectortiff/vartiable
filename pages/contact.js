@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import Button from "@/components/Button";
 
 function Scene({ objref, contactForm, setContactForm }) {
   useFrame(() => {
@@ -80,58 +81,75 @@ export default function Contact() {
               },
             }}
             className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-12 border border-midnight"
+            onSubmit={(e) => e.preventDefault()}
           >
             <div className="border-b border-midnight p-8 flex justify-between items-center">
               <h2 className="text-3xl uppercase">Claim your coffee time</h2>
-              <svg className="w-20" viewBox="0 0 248 76" fill="none">
-                <mask id="path-1-inside-1_0_1" fill="white">
-                  <path d="M86 0H162V76H86V0Z" />
-                </mask>
-                <path d="M86 0H162V76H86V0Z" fill="white" />
-                <path
-                  d="M86 0V-2H84V0H86ZM162 0H164V-2H162V0ZM162 76V84H164V76H162ZM86 76H84V84H86V76ZM86 2H162V-2H86V2ZM160 0V76H164V0H160ZM162 68H86V84H162V68ZM88 76V0H84V76H88Z"
-                  fill="#EB1E1E"
-                  mask="url(#path-1-inside-1_0_1)"
-                />
-                <rect
-                  x="108"
-                  y="21"
-                  width="32"
-                  height="32"
-                  fill="white"
-                  stroke="#EB1E1E"
-                  stroke-width="6"
-                />
-                <mask id="path-4-inside-2_0_1" fill="white">
-                  <path d="M0 0H76V76H0V0Z" />
-                </mask>
-                <path d="M0 0H76V76H0V0Z" fill="white" />
-                <path
-                  d="M0 0V-2H-2V0H0ZM76 0H78V-2H76V0ZM76 76V84H78V76H76ZM0 76H-2V84H0V76ZM0 2H76V-2H0V2ZM74 0V76H78V0H74ZM76 68H0V84H76V68ZM2 76V0H-2V76H2Z"
-                  fill="#EB1E1E"
-                  mask="url(#path-4-inside-2_0_1)"
-                />
-                <path d="M19 53H57" stroke="#EB1E1E" stroke-width="6" />
-                <mask id="path-7-inside-3_0_1" fill="white">
-                  <path d="M172 0H248V76H172V0Z" />
-                </mask>
-                <path d="M172 0H248V76H172V0Z" fill="white" />
-                <path
-                  d="M172 0V-2H170V0H172ZM248 0H250V-2H248V0ZM248 76V84H250V76H248ZM172 76H170V84H172V76ZM172 2H248V-2H172V2ZM246 0V76H250V0H246ZM248 68H172V84H248V68ZM174 76V0H170V76H174Z"
-                  fill="#EB1E1E"
-                  mask="url(#path-7-inside-3_0_1)"
-                />
-                <path
-                  d="M196 50.8672L222.87 23.9971"
-                  stroke="#EB1E1E"
-                  stroke-width="6"
-                />
-                <path
-                  d="M196.436 24.4375L223.306 51.3076"
-                  stroke="#EB1E1E"
-                  stroke-width="6"
-                />
-              </svg>
+              <div className="flex gap-2">
+                <button>
+                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                    <path
+                      d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M0 0.257812V-1.09703H-1.35484V0.257812H0ZM51.4839 0.257812H52.8387V-1.09703H51.4839V0.257812ZM51.4839 51.7417V57.161H52.8387V51.7417H51.4839ZM0 51.7417H-1.35484V57.161H0V51.7417ZM0 1.61265H51.4839V-1.09703H0V1.61265ZM50.129 0.257812V51.7417H52.8387V0.257812H50.129ZM51.4839 46.3223H0V57.161H51.4839V46.3223ZM1.35484 51.7417V0.257812H-1.35484V51.7417H1.35484Z"
+                      fill="#101010"
+                      mask="url(#path-1-inside-1_159_414)"
+                    />
+                    <path
+                      d="M12.8711 36.1602H38.613"
+                      stroke="#101010"
+                      stroke-width="4.06452"
+                    />
+                  </svg>
+                </button>
+                <button>
+                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                    <path
+                      d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M0.257812 0.257812V-1.09703H-1.09703V0.257812H0.257812ZM51.7417 0.257812H53.0965V-1.09703H51.7417V0.257812ZM51.7417 51.7417V57.161H53.0965V51.7417H51.7417ZM0.257812 51.7417H-1.09703V57.161H0.257812V51.7417ZM0.257812 1.61265H51.7417V-1.09703H0.257812V1.61265ZM50.3868 0.257812V51.7417H53.0965V0.257812H50.3868ZM51.7417 46.3223H0.257812V57.161H51.7417V46.3223ZM1.61265 51.7417V0.257812H-1.09703V51.7417H1.61265Z"
+                      fill="#101010"
+                      mask="url(#path-1-inside-1_159_411)"
+                    />
+                    <rect
+                      x="15.1612"
+                      y="14.4854"
+                      width="21.6774"
+                      height="21.6774"
+                      fill="white"
+                      stroke="#101010"
+                      stroke-width="4.06452"
+                    />
+                  </svg>
+                </button>
+                <button onClick={() => setContactForm(!contactForm)}>
+                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                    <path
+                      d="M0.515625 0.257812H51.9995V51.7417H0.515625V0.257812Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M0.515625 0.257812V-1.09703H-0.839214V0.257812H0.515625ZM51.9995 0.257812H53.3543V-1.09703H51.9995V0.257812ZM51.9995 51.7417V57.161H53.3543V51.7417H51.9995ZM0.515625 51.7417H-0.839214V57.161H0.515625V51.7417ZM0.515625 1.61265H51.9995V-1.09703H0.515625V1.61265ZM50.6447 0.257812V51.7417H53.3543V0.257812H50.6447ZM51.9995 46.3223H0.515625V57.161H51.9995V46.3223ZM1.87046 51.7417V0.257812H-0.839214V51.7417H1.87046Z"
+                      fill="#101010"
+                      mask="url(#path-1-inside-1_159_417)"
+                    />
+                    <path
+                      d="M16.7734 34.7148L34.9757 16.5125"
+                      stroke="#101010"
+                      stroke-width="4.06452"
+                    />
+                    <path
+                      d="M17.0684 16.8086L35.2707 35.0109"
+                      stroke="#101010"
+                      stroke-width="4.06452"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
             <div className="w-full grid grid-cols-1 gap-4 p-8">
               <div className="w-full grid grid-cols-2 gap-4">
@@ -151,9 +169,7 @@ export default function Contact() {
                 className="p-4 bg-transparent border border-midnight"
               ></textarea>
               <div className="flex justify-end">
-                <button className="p-4 px-10 text-white bg-midnight">
-                  Send
-                </button>
+                <Button>Send</Button>
               </div>
             </div>
           </motion.form>

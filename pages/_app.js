@@ -59,16 +59,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ThemeProvider defaultTheme="dark">
-      {loader ? (
-        <div className="w-screen h-screen fixed top-0 left-0 bg-midnight flex flex-col gap-8 items-center justify-center">
-          <SplitTextIntoSpans>Hey Life</SplitTextIntoSpans>
-        </div>
-      ) : (
-        <>
-          <Navigation />
-          <Component {...pageProps} />
-        </>
-      )}
+      <>
+        {loader ? (
+          <div className="w-screen h-screen fixed top-0 left-0 bg-midnight flex flex-col gap-8 items-center justify-center z-50">
+            <SplitTextIntoSpans>Hey Life</SplitTextIntoSpans>
+          </div>
+        ) : null}
+        <Navigation />
+        <Component {...pageProps} />
+      </>
     </ThemeProvider>
   );
 }

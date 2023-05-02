@@ -3,12 +3,24 @@ import Container from "./container";
 import Link from "next/link";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { getAllServices } from "@/lib/api";
 
 export default function Navigation() {
   const [menu, setMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  // const [allServices, setAllServices] = useState([]);
+
+  // const getAllServicesFunct = async () => {
+  //   const services = await getAllServices(null);
+  //   setAllServices(services);
+  // };
+
+  // useEffect(() => {
+  //   getAllServicesFunct();
+  // }, []);
 
   return (
     <nav className="w-screen flex items-end h-20 fixed z-50">
@@ -71,7 +83,6 @@ export default function Navigation() {
                   className="w-4 h-4 m-[2px] rounded-full bg-midnight"
                 ></motion.div>
               </div>
-
               <Sun />
             </button>
             <button className="px-4 py-1 bg-white text-midnight rounded-full hidden md:block">
@@ -84,13 +95,13 @@ export default function Navigation() {
             >
               Menu
             </motion.button>
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {menu ? (
                 <motion.div
                   layoutId="zeez"
                   className="p-6 h-screen md:w-screen w-screen absolute left-0 bottom-0 right-0 top-0 flex flex-col gap-6 bg-white text-midnight"
                 >
-                  <div className="m-auto w-[50vw]">
+                  <div className="m-auto w-[50vw] flex flex-col gap-4">
                     <div>
                       <button onClick={() => setMenu(!menu)}>Close</button>
                     </div>
@@ -116,6 +127,23 @@ export default function Navigation() {
                       >
                         Contact
                       </Link>
+                      <div className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]">
+                        Services
+                        {/* <pre>{JSON.stringify(allServices, 0, 4)}</pre> */}
+                        <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
+                          {/* {allServices.stories.map((storie, idx) => (
+                            <Link
+                              href={storie.full_slug}
+                              className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
+                            >
+                              <h2 className="text-5xl font-bold">{idx + 1}</h2>
+                              <h3 className="md:text-[2vw] text-2xl uppercase">
+                                {storie.content.Title}
+                              </h3>
+                            </Link>
+                          ))} */}
+                        </div>
+                      </div>
                     </div>
                     <h2 className="text-4xl">Let’s drink a coffee !</h2>
                     <div className="flex justify-between">

@@ -8,6 +8,7 @@ import { CMS_NAME } from "@/lib/constants";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Button from "@/components/Button";
 
 import localFont from "next/font/local";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
@@ -64,11 +65,11 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
             <h2 className="dark:text-tournesol text-romance text-2xl md:text-6xl uppercase leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
-            <div>
+            <div className="flex flex-col gap-4 items-start">
               <p className="leading-relaxed">
                 {pageContent.story.content.ProjectSectionParagraph}
               </p>
-              <Link href="/projets">Discover our projects</Link>
+              <Button href="/projets">Discover our projects</Button>
             </div>
           </div>
           <div className="pt-20">
@@ -177,12 +178,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               alt=""
               className="w-full grayscale"
             />
-            <Link
-              className="absolute bottom-10 px-4 py-1 bg-white text-midnight rounded-full"
-              href="/contact"
-            >
-              Let's have a chat!
-            </Link>
+            <div className="absolute bottom-10">
+              <Button href="/contact">Let's have a chat!</Button>
+            </div>
           </div>
         </Container>
       </footer>

@@ -116,7 +116,7 @@ export default function Post({ post, preview }) {
                   <img
                     src={post.content.FooterSectionImage.filename}
                     alt=""
-                    className="w-full grayscale"
+                    className="w-full h-80 object-cover grayscale"
                   />
                   <Link
                     className="absolute bottom-10 px-4 py-1 bg-white text-midnight rounded-full"
