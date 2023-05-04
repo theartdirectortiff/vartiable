@@ -266,22 +266,21 @@ export default function Projects({ allPosts }) {
         </div>
         <div className="h-[calc(100%-6rem)] overflow-y-auto">
           {allPosts.stories.map((post, idx) => (
-            <div
-              key={post.name + idx}
-              className="w-full items-center py-4 border-y border-y-gray-600 -mt-[1px] relative group"
-            >
-              <div className="absolute bottom-0 z-0 w-full h-0 dark:bg-tournesol bg-romance group-hover:h-full transition-all duration-200"></div>
-              <Container>
-                <Link href={post.full_slug} className="flex justify-between">
-                  <div className="flex items-center gap-8 relative dark:group-hover:text-midnight group-hover:text-white transition-all duration-200">
-                    <h2 className="text-5xl font-bold">{idx + 1}</h2>
-                    <h3 className="md:text-[2vw] text-2xl uppercase">
-                      {post.content.ProjectName}
-                    </h3>
+            <Link href={post.full_slug} key={post.name + idx}>
+              <div className="w-full items-center py-4 border-y border-y-gray-600 -mt-[1px] relative group">
+                <div className="absolute bottom-0 z-0 w-full h-0 dark:bg-tournesol bg-romance group-hover:h-full transition-all duration-200"></div>
+                <Container>
+                  <div className="flex justify-between relative z-10">
+                    <div className="flex items-center gap-8 relative dark:group-hover:text-midnight group-hover:text-white transition-all duration-200">
+                      <h2 className="text-5xl font-bold">{idx + 1}</h2>
+                      <h3 className="md:text-[2vw] text-2xl uppercase">
+                        {post.content.ProjectName}
+                      </h3>
+                    </div>
                   </div>
-                </Link>
-              </Container>
-            </div>
+                </Container>
+              </div>
+            </Link>
           ))}
         </div>
       </motion.div>
