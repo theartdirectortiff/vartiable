@@ -105,11 +105,11 @@ export default function Navigation() {
                   },
                 },
               }}
-              className="p-6 h-screen w-1/3 absolute bottom-0 right-0 top-0 flex flex-col gap-6 bg-white text-midnight"
+              className="p-6 h-screen w-full md:w-1/3 absolute bottom-0 right-0 top-0 flex flex-col gap-6 bg-white text-midnight"
             >
               <div className="m-auto w-full flex flex-col gap-4">
                 <div className="flex gap-2">
-                  <button>
+                  <button onClick={() => setMenu(!menu)}>
                     <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                       <path
                         d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
@@ -127,7 +127,7 @@ export default function Navigation() {
                       />
                     </svg>
                   </button>
-                  <button>
+                  <button onClick={() => setMenu(!menu)}>
                     <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                       <path
                         d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"

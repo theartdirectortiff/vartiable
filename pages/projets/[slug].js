@@ -95,7 +95,7 @@ export default function Post({ post, preview }) {
               <section className="pb-36">
                 <Container>
                   <div className="grid grid-cols-1 gap-12">
-                    {post.content.Gallery.map((item, idx) => (
+                    {post.content.Gallery?.map((item, idx) => (
                       <img
                         className="rounded-md"
                         src={item.filename}

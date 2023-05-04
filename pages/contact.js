@@ -16,7 +16,7 @@ export default function Contact({ pageContent }) {
     <>
       <div className="top-48 relative">
         <Container>
-          <h1 className="text-tournesol text-center text-[5vw] uppercase leading-tight">
+          <h1 className="text-romance dark:text-tournesol text-center text-[5vw] uppercase leading-tight">
             {pageContent.story.content.Title}
           </h1>
           <p className="text-center opacity-50">
