@@ -1,7 +1,4 @@
 import Container from "@/components/container";
-import MoreStories from "@/components/more-stories";
-import HeroPost from "@/components/hero-post";
-import Intro from "@/components/intro";
 import { getAllPosts, getAllServices, getPage } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
@@ -9,10 +6,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Button from "@/components/Button";
+import Footer from "@/components/footer";
 
 import localFont from "next/font/local";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
-const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
+// const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
 
 export default function Index({ allPosts, pageContent, allServices, preview }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,38 +29,48 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
         <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
       </Head>
       <section className="h-screen flex items-center relative">
-        <img
-          src="https://images.unsplash.com/photo-1668455199701-284281127a87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80"
-          className="absolute w-screen h-screen z-0"
-          alt=""
-        />
-        <Container>
-          <div className="relative">
-            {/* <span className="opacity-50">
-              {pageContent.story.content.TeaserSpan}
-            </span> */}
-            <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className={`${clashDisplay.className} dark:text-white text-romance text-[7vw] leading-tight font-bold`}
-            >
-              {pageContent.story.content.TeaserText}
-            </motion.h1>
-          </div>
-        </Container>
-      </section>
-      <section>
-        <video className="w-screen" autoPlay muted playsInline loop>
+        <motion.video
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3 }}
+          className="w-screen h-screen absolute z-0 object-cover"
+          autoPlay
+          muted
+          playsInline
+          loop
+        >
           <source
             src={pageContent.story.content.Video.filename}
             type="video/mp4"
           ></source>
-        </video>
+        </motion.video>
+        <div className="h-screen relative flex flex-col justify-end mb-16 z-40">
+          <div className="w-screen flex justify-center">
+            {/* <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`text-white w-4/6 text-[4vw] leading-tight font-medium uppercase`}
+              >
+                {pageContent.story.content.TeaserText}
+              </motion.h1> */}
+            {/* <div className="grid grid-cols-1 md:grid-cols-2"> */}
+            {/* <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className={`text-white text-[18px] leading-tight font-light indent-16`}
+                >
+                  {pageContent.story.content.ProjectSectionParagraph}
+                </motion.p> */}
+            {/* </div> */}
+            <Button href="/#start">Explorer</Button>
+            <a href="#start">Explorer</a>
+          </div>
+        </div>
       </section>
-      <section className="py-32 w-screen overflow-hidden">
+      <section className="py-32 w-screen overflow-hidden" id="start">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="dark:text-tournesol text-romance text-2xl md:text-6xl uppercase leading-tight">
+            <h2 className="dark:text-tournesol text-romance text-[13vw] md:text-6xl uppercase leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
             <div className="flex flex-col gap-4 items-start">
@@ -101,9 +109,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           </div>
         </Container>
       </section>
-      <section className="py-32">
+      <section className="py-32" id="services">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-center text-[6vw] uppercase  leading-tight">
+          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] md:text-[6vw] uppercase  leading-tight">
             {pageContent.story.content.ServiceSectionTitle}
           </h1>
         </Container>
@@ -128,7 +136,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               <div className="absolute bottom-0 z-0 w-full h-0 dark:bg-tournesol bg-romance group-hover:h-full transition-all duration-200"></div>
               <Container>
                 <Link href={srvc.full_slug} className="flex justify-between">
-                  <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
+                  <div className="flex items-center gap-8 relative dark:group-hover:text-midnight group-hover:text-white transition-all duration-200">
                     <h2 className="text-5xl font-bold">{idx + 1}</h2>
                     <h3 className="md:text-[2vw] text-2xl uppercase">
                       {srvc.content.Title}
@@ -151,39 +159,10 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           ))}
         </div>
       </section>
-      <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
-        <Container>
-          <div
-            className={`${courierNew.className} text-black grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
-          >
-            <div className="flex flex-col">
-              <span>Instagram</span>
-              <span>LinkedIn</span>
-              <span>Spotify</span>
-            </div>
-            <span className="text-center">
-              Rte de la Fonderie 2, 1700 Fribourg
-            </span>
-            <div className="flex flex-col text-right">
-              <span>bonjour@vartiable.com</span>
-              <span>0791571767</span>
-            </div>
-          </div>
-          <h1 className="text-black text-center font-semibold text-[5vw] uppercase leading-tight w-5/6 m-auto">
-            {pageContent.story.content.FooterSectionTitle}
-          </h1>
-          <div className="w-2/4 m-auto mt-10 rounded-tl-3xl rounded-tr-3xl overflow-hidden relative flex justify-center">
-            <img
-              src={pageContent.story.content.FooterSectionImage.filename}
-              alt=""
-              className="w-full grayscale"
-            />
-            <div className="absolute bottom-10">
-              <Button href="/contact">Let's have a chat!</Button>
-            </div>
-          </div>
-        </Container>
-      </footer>
+      <Footer
+        title={pageContent.story.content.FooterSectionTitle}
+        image={pageContent.story.content.FooterSectionImage.filename}
+      />
     </>
   );
 }

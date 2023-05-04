@@ -5,61 +5,58 @@ import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Button from "@/components/Button";
+import { getPage } from "@/lib/api";
+import Link from "next/link";
 
-function Scene({ objref, contactForm, setContactForm }) {
-  useFrame(() => {
-    objref.current.rotation.y += 0.002;
-  });
-
-  const gltf = useLoader(GLTFLoader, "/models/nokia_2/scene.gltf");
-
-  return (
-    <>
-      <ambientLight intensity={2.35} />
-      <primitive
-        ref={objref}
-        scale={[0.01, 0.01, 0.01]}
-        object={gltf.scene}
-        receiveShadow
-        castShadow
-        onClick={() => setContactForm(!contactForm)}
-      />
-    </>
-  );
-}
-
-export default function Contact() {
+export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
   const objRef = useRef(false);
 
   return (
     <>
-      <div className="h-screen w-screen absolute z-0">
-        <Canvas>
-          <Scene
-            contactForm={contactForm}
-            setContactForm={setContactForm}
-            objref={objRef}
-            scale={1}
-          />
-          <OrbitControls
-            makeDefault
-            enableZoom={false}
-            enablePan={false}
-            enableDamping
-            maxPolarAngle={Math.PI / 2}
-            minAzimuthAngle={-Math.PI / 4}
-          />
-        </Canvas>
-      </div>
       <div className="top-48 relative">
         <Container>
-          <h1 className="text-tournesol text-center text-[5vw] uppercase">
-            TOUCH THE COFE
+          <h1 className="text-tournesol text-center text-[5vw] uppercase leading-tight">
+            {pageContent.story.content.Title}
           </h1>
           <p className="text-center opacity-50">
-            To discover why its cool to drink a coffee with us
+            {pageContent.story.content.Subtitle}
           </p>
+          <div
+            className={`text-midnight dark:text-white grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
+          >
+            <div className="flex flex-col">
+              <Link target="_blank" href="https://www.instagram.com/vartiable/">
+                Instagram
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.linkedin.com/company/vart-iable-agence-cr%C3%A9ative/"
+              >
+                LinkedIn
+              </Link>
+              <Link
+                target="_blank"
+                href="https://open.spotify.com/show/4UumbBYNRVlD0lkUbE9ALM?si=172df12d71854836"
+              >
+                Spotify
+              </Link>
+            </div>
+            <span className="text-center">
+              Rte de la Fonderie 2, 1700 Fribourg
+            </span>
+            <div className="flex flex-col text-right">
+              <Link href="mailto:bonjour@vartiable.com?subject=Bonjour la vie !">
+                bonjour@vartiable.com
+              </Link>
+              <Link href="tel:0791571767">0791571767</Link>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Button action={() => setContactForm(!contactForm)}>
+              PLANIFIER SON CAFÉ
+            </Button>
+          </div>
           <motion.form
             animate={contactForm ? "open" : "closed"}
             initial="closed"
@@ -80,7 +77,7 @@ export default function Contact() {
                 },
               },
             }}
-            className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-12 border border-midnight"
+            className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-0 md:m-12 border border-midnight"
             onSubmit={(e) => e.preventDefault()}
           >
             <div className="border-b border-midnight p-8 flex justify-between items-center">
@@ -177,4 +174,11 @@ export default function Contact() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps({ preview = null }) {
+  const pageContent = (await getPage("coffee", preview)) || [];
+  return {
+    props: { pageContent, preview },
+  };
 }

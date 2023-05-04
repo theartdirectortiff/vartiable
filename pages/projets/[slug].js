@@ -1,19 +1,11 @@
 import { useRouter } from "next/router";
-import ErrorPage from "next/error";
 import Container from "@/components/container";
-import PostBody from "@/components/post-body";
-import MoreStories from "@/components/more-stories";
-import Header from "@/components/header";
-import PostHeader from "@/components/post-header";
-import SectionSeparator from "@/components/section-separator";
-import { getAllPostsWithSlug, getPost, getPostAndMorePosts } from "@/lib/api";
-import PostTitle from "@/components/post-title";
+import { getAllPostsWithSlug, getPost } from "@/lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
-import RichTextResolver from "storyblok-js-client/dist/richTextResolver";
 
 import localFont from "next/font/local";
-import Link from "next/link";
+import Footer from "@/components/footer";
 const courierNew = localFont({ src: "../../fonts/courier-new.ttf" });
 
 export default function Post({ post, preview }) {
@@ -36,15 +28,25 @@ export default function Post({ post, preview }) {
             </Head>
             <section className="py-48">
               <Container>
-                <h1 className="text-tournesol text-6xl uppercase">
+                <h1 className="text-romance dark:text-tournesol text-6xl uppercase">
                   {post.content.ProjectName}
                 </h1>
+                {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}
               </Container>
             </section>
-            <img
+            <video
               className="w-screen h-screen object-cover"
-              src={post.content.ProjectThumbnail}
-            />
+              autoPlay
+              muted
+              playsInline
+              loop
+              poster={post.content.ProjectThumbnail}
+            >
+              <source
+                src={post.content.ProjectMain.filename}
+                type="video/mp4"
+              ></source>
+            </video>
             <Container>
               <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
                 <div>
@@ -90,43 +92,24 @@ export default function Post({ post, preview }) {
                   </div>
                 </div>
               </div>
+              <section className="pb-36">
+                <Container>
+                  <div className="grid grid-cols-1 gap-12">
+                    {post.content.Gallery.map((item, idx) => (
+                      <img
+                        className="rounded-md"
+                        src={item.filename}
+                        alt="SEO"
+                      />
+                    ))}
+                  </div>
+                </Container>
+              </section>
             </Container>
-            <footer className="bg-tournesol rounded-tl-xl rounded-tr-xl">
-              <Container>
-                <div
-                  className={`${courierNew.className} text-black grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
-                >
-                  <div className="flex flex-col">
-                    <span>Instagram</span>
-                    <span>LinkedIn</span>
-                    <span>Spotify</span>
-                  </div>
-                  <span className="text-center">
-                    Rte de la Fonderie 2, 1700 Fribourg
-                  </span>
-                  <div className="flex flex-col text-right">
-                    <span>bonjour@vartiable.com</span>
-                    <span>0791571767</span>
-                  </div>
-                </div>
-                <h1 className="text-black text-center font-semibold text-[5vw] uppercase leading-tight  w-5/6 m-auto">
-                  {post.content.FooterSectionTitle}
-                </h1>
-                <div className="w-2/4 m-auto mt-10 rounded-tl-3xl rounded-tr-3xl overflow-hidden relative flex justify-center">
-                  <img
-                    src={post.content.FooterSectionImage.filename}
-                    alt=""
-                    className="w-full h-80 object-cover grayscale"
-                  />
-                  <Link
-                    className="absolute bottom-10 px-4 py-1 bg-white text-midnight rounded-full"
-                    href="/contact"
-                  >
-                    Let's have a chat!
-                  </Link>
-                </div>
-              </Container>
-            </footer>
+            <Footer
+              title={post.content.FooterSectionTitle}
+              image={post.content.FooterSectionImage.filename}
+            />
           </article>
           {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
         </>

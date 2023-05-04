@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "@react-three/drei";
@@ -34,6 +34,37 @@ function Scene({ objref }) {
 export default function Projects({ allPosts }) {
   const [projectsList, setProjectsList] = useState(false);
   const tl = gsap.timeline({ paused: true });
+
+  // Use that instead of a not reachable in function scope arr
+  const [random_projects_state, set_random_projects_state] = useState([]);
+  const [animateRandomProjects, setAnimateRandomProjects] = useState(true);
+
+  const getRandomProjects = () => {
+    setAnimateRandomProjects(true);
+    const arr = allPosts.stories;
+    const random_ids = [];
+    const random_projects = [];
+
+    while (random_ids.length < 4) {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      if (!random_ids.includes(randomIndex)) {
+        random_ids.push(randomIndex);
+      }
+    }
+
+    random_ids.map((idx) => {
+      random_projects.push(arr[idx]);
+    });
+
+    setTimeout(() => {
+      set_random_projects_state([...random_projects]);
+      setAnimateRandomProjects(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    getRandomProjects();
+  }, []);
 
   const dom = useRef();
   const macObjRef = useRef();
@@ -87,21 +118,61 @@ export default function Projects({ allPosts }) {
         className="fixed bottom-0 left-0 right-0 flex flex-col items-center"
       >
         <div className="flex gap-2">
-          <Button>RANDOM CHOICE</Button>
+          <Button action={getRandomProjects}>Random Choice</Button>
           <Button action={handleProjectsListClick}>Projects List</Button>
         </div>
-        <div className="flex gap-2 py-8">
-          <div className="w-48 h-48 bg-red-500 rounded-md project-item"></div>
-          <div className="w-48 h-48 bg-red-500 rounded-md project-item"></div>
-          <div className="w-48 h-48 bg-red-500 rounded-md project-item"></div>
-          <div className="w-48 h-48 bg-red-500 rounded-md project-item"></div>
-        </div>
+        <motion.div
+          className="flex gap-2 py-8"
+          animate={animateRandomProjects ? "from" : "to"}
+          initial="from"
+          variants={{
+            from: {
+              opacity: 0,
+              y: 20,
+              transition: {
+                type: "tween",
+                ease: [0.4, 0, 0.2, 1],
+              },
+            },
+            to: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                staggerChildren: 0.1,
+                type: "tween",
+                ease: [0.4, 0, 0.2, 1],
+              },
+            },
+          }}
+        >
+          {random_projects_state.map((prjct, idx) => (
+            <motion.div
+              variants={{
+                from: { y: 20, opacity: 0 },
+                to: {
+                  y: 0,
+                  opacity: 1,
+                },
+              }}
+              key={idx}
+              className="w-48 h-48 bg-black rounded-md project-item overflow-hidden border-2 border-gray-200 dark:border-gray-700"
+            >
+              <Link href={prjct.full_slug}>
+                <img
+                  className="w-full h-full object-cover"
+                  src={prjct.content.ProjectThumbnail}
+                  alt={prjct.content.ProjectName}
+                />
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       <motion.div
         animate={projectsList ? "open" : "closed"}
         initial="closed"
-        className="fixed overflow-hidden top-0 bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-12 border border-midnight"
+        className="fixed overflow-hidden top-0 bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-0 mt-20 md:m-12 md:mt-20 border border-midnight"
         variants={{
           open: {
             y: 0,
@@ -202,7 +273,7 @@ export default function Projects({ allPosts }) {
               <div className="absolute bottom-0 z-0 w-full h-0 dark:bg-tournesol bg-romance group-hover:h-full transition-all duration-200"></div>
               <Container>
                 <Link href={post.full_slug} className="flex justify-between">
-                  <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
+                  <div className="flex items-center gap-8 relative dark:group-hover:text-midnight group-hover:text-white transition-all duration-200">
                     <h2 className="text-5xl font-bold">{idx + 1}</h2>
                     <h3 className="md:text-[2vw] text-2xl uppercase">
                       {post.content.ProjectName}
