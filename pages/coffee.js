@@ -5,7 +5,6 @@ import Button from "@/components/Button";
 import { getPage } from "@/lib/api";
 import Link from "next/link";
 import Head from "next/head";
-import { Client } from "@notionhq/client";
 
 export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
@@ -13,38 +12,26 @@ export default function Contact({ pageContent }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const notionDatabase = "f261707589924b9597e9d28fc838eaa3";
-  const notion = new Client({
-    auth: process.env.NOTION_API_SECRET,
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await notion.pages
-      .create({
-        parent: {
-          type: "database_id",
-          database_id: notionDatabase,
+    try {
+      const res = await fetch("/api/notion-crm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        properties: {
-          Nom: {
-            title: [
-              {
-                text: {
-                  content: name,
-                },
-              },
-            ],
-          },
-        },
-      })
-      .then(() => {
-        alert("Success");
-      })
-      .catch((err) => {
-        console.log(err);
+        body: JSON.stringify({ name }),
       });
+
+      if (res.ok) {
+        console.log("Message sent successfully");
+      } else {
+        console.error("Error sending message:", res.statusText);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   return (
