@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import Button from "./Button";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
 
-export default function Footer({ title, image }) {
+export default function Footer({ title, image, cta }) {
   return (
     <footer className="bg-[#1a1a1a] rounded-tl-xl rounded-tr-xl">
       <Container>
@@ -49,7 +49,7 @@ export default function Footer({ title, image }) {
             className="w-full h-full grayscale object-cover"
           />
           <div className="absolute bottom-10">
-            <Button href="/contact">Let's have a chat!</Button>
+            <Button href="/coffee">{cta}</Button>
           </div>
         </div>
       </Container>

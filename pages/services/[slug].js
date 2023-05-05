@@ -2,12 +2,8 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import { getAllServicesWithSlug, getService } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
 
-import localFont from "next/font/local";
-import Link from "next/link";
 import Footer from "@/components/footer";
-const courierNew = localFont({ src: "../../fonts/courier-new.ttf" });
 
 export default function Post({ post, preview }) {
   const router = useRouter();
@@ -16,17 +12,18 @@ export default function Post({ post, preview }) {
   // }
   return (
     <>
+      <Head>
+        <title>VART’IABLE | Agence Créative</title>
+        <meta
+          name="description"
+          content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
+        />
+      </Head>
       {router.isFallback ? (
         <h1>Loading…</h1>
       ) : (
         <>
           <article>
-            <Head>
-              <title>
-                {post.content.title} | Next.js Blog Example with {CMS_NAME}
-              </title>
-              <meta property="og:image" content={post.content.image} />
-            </Head>
             <section className="h-screen">
               <Container>
                 <div className="flex flex-col justify-between h-screen py-32">
@@ -67,6 +64,7 @@ export default function Post({ post, preview }) {
             {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}
             <Footer
               title={post.content.FooterSectionTitle}
+              cta={post.content.FooterCallToAction}
               image={post.content.FooterSectionImage.filename}
             />
           </article>

@@ -8,6 +8,9 @@ import { useTheme } from "next-themes";
 import { getAllServices } from "@/lib/api";
 import { useRouter } from "next/router";
 
+import localFont from "next/font/local";
+const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+
 export default function Navigation() {
   const [menu, setMenu] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -105,7 +108,7 @@ export default function Navigation() {
                   },
                 },
               }}
-              className="p-6 h-screen w-full md:w-1/3 absolute bottom-0 right-0 top-0 flex flex-col gap-6 bg-white text-midnight"
+              className="p-6 h-screen w-full md:w-1/3 absolute bottom-0 right-0 top-0 flex flex-col gap-6 dark:bg-white dark:text-midnight text-white bg-midnight"
             >
               <div className="m-auto w-full flex flex-col gap-4">
                 <div className="flex gap-2">
@@ -190,7 +193,7 @@ export default function Navigation() {
                     Our mission
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/coffee"
                     className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
                   >
                     Contact
@@ -198,6 +201,7 @@ export default function Navigation() {
                   <Link
                     className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
                     href="/#services"
+                    scroll={false}
                   >
                     Services
                   </Link>
@@ -219,7 +223,9 @@ export default function Navigation() {
                   </div>
                 </div>
                 <h2 className="text-4xl">Let’s drink a coffee !</h2>
-                <div className="flex justify-between">
+                <div
+                  className={`${courierNew.className} flex justify-between opacity-50`}
+                >
                   <Link
                     target="_blank"
                     href="https://www.instagram.com/vartiable/"
@@ -239,6 +245,9 @@ export default function Navigation() {
                     Spotify
                   </Link>
                 </div>
+                <button className="px-4 py-1 bg-white text-midnight rounded-full md:hidden block">
+                  Fr / En
+                </button>
               </div>
             </motion.div>
           </div>

@@ -9,6 +9,7 @@ import Container from "@/components/container";
 import Button from "@/components/Button";
 import { getAllPosts } from "@/lib/api";
 import Link from "next/link";
+import Head from "next/head";
 
 function Scene({ objref }) {
   useFrame(() => {
@@ -101,6 +102,13 @@ export default function Projects({ allPosts }) {
 
   return (
     <section className="h-screen">
+      <Head>
+        <title>VART’IABLE | Agence Créative</title>
+        <meta
+          name="description"
+          content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
+        />
+      </Head>
       <Canvas>
         <Scene objref={macObjRef} scale={1} />
         <OrbitControls

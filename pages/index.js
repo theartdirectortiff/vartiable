@@ -26,7 +26,11 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
   return (
     <>
       <Head>
-        <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
+        <title>VART’IABLE | Agence Créative</title>
+        <meta
+          name="description"
+          content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
+        />
       </Head>
       <section className="h-screen flex items-center relative">
         <motion.video
@@ -44,26 +48,11 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
             type="video/mp4"
           ></source>
         </motion.video>
-        <div className="h-screen relative flex flex-col justify-end mb-16 z-40">
+        <div className="h-screen relative flex flex-col justify-end mb-44 md:mb-16 z-40">
           <div className="w-screen flex justify-center">
-            {/* <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className={`text-white w-4/6 text-[4vw] leading-tight font-medium uppercase`}
-              >
-                {pageContent.story.content.TeaserText}
-              </motion.h1> */}
-            {/* <div className="grid grid-cols-1 md:grid-cols-2"> */}
-            {/* <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className={`text-white text-[18px] leading-tight font-light indent-16`}
-                >
-                  {pageContent.story.content.ProjectSectionParagraph}
-                </motion.p> */}
-            {/* </div> */}
-            <Button href="/#start">Explorer</Button>
-            <a href="#start">Explorer</a>
+            <Button href="/#start">
+              {pageContent.story.content.HomeButton}
+            </Button>
           </div>
         </div>
       </section>
@@ -77,7 +66,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
               <p className="leading-relaxed">
                 {pageContent.story.content.ProjectSectionParagraph}
               </p>
-              <Button href="/projets">Discover our projects</Button>
+              <Button href="/projets">
+                {pageContent.story.content.ProjectButton}
+              </Button>
             </div>
           </div>
           <div className="pt-20">
@@ -90,18 +81,21 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                 className="flex gap-4"
               >
                 {allPosts.stories.map((stry, idx) => (
-                  <motion.div className="min-w-[300px] max-w-[300px] md:min-w-[500px] md:max-w-[500px] rounded-md overflow-hidden">
-                    <Link
-                      href={stry.full_slug}
+                  <motion.div className="min-w-[300px] max-w-[300px] md:min-w-[500px] md:max-w-[500px] overflow-hidden">
+                    <div
                       key={idx}
-                      // className="select-none pointer-events-none"
+                      onMouseDown={(e) => e.preventDefault()}
+                      className="select-none relative"
                     >
                       <img
                         key={idx}
                         src={stry.content.ProjectThumbnail}
-                        className="w-full h-full object-cover"
+                        className="w-full object-cover aspect-square pointer-events-none rounded-md"
                       />
-                    </Link>
+                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10">
+                        <Button href={stry.full_slug}>View Project</Button>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -162,6 +156,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       <Footer
         title={pageContent.story.content.FooterSectionTitle}
         image={pageContent.story.content.FooterSectionImage.filename}
+        cta={pageContent.story.content.FooterCallToAction}
       />
     </>
   );

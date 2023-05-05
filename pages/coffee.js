@@ -1,29 +1,71 @@
 import Container from "@/components/container";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Button from "@/components/Button";
 import { getPage } from "@/lib/api";
 import Link from "next/link";
+import Head from "next/head";
+import { Client } from "@notionhq/client";
 
 export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
-  const objRef = useRef(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const notionDatabase = "f261707589924b9597e9d28fc838eaa3";
+  const notion = new Client({
+    auth: process.env.NOTION_API_SECRET,
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await notion.pages
+      .create({
+        parent: {
+          type: "database_id",
+          database_id: notionDatabase,
+        },
+        properties: {
+          Nom: {
+            title: [
+              {
+                text: {
+                  content: name,
+                },
+              },
+            ],
+          },
+        },
+      })
+      .then(() => {
+        alert("Success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
+      <Head>
+        <title>VART’IABLE | Agence Créative</title>
+        <meta
+          name="description"
+          content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
+        />
+      </Head>
       <div className="top-48 relative">
         <Container>
-          <h1 className="text-romance dark:text-tournesol text-center text-[5vw] uppercase leading-tight">
+          <h1 className="dark:text-tournesol text-romance text-5xl text-center md:text-[6vw] uppercase leading-tight font-bold">
             {pageContent.story.content.Title}
           </h1>
           <p className="text-center opacity-50">
             {pageContent.story.content.Subtitle}
           </p>
           <div
-            className={`text-midnight dark:text-white grid  sm:grid-cols-1 md:grid-cols-3 sm:gap-12 md:gap-32 p-10 opacity-50 uppercase`}
+            className={` text-white grid sm:grid-cols-1 md:grid-cols-3 gap-8 md:gap-32 p-10 opacity-50 uppercase`}
           >
             <div className="flex flex-col">
               <Link target="_blank" href="https://www.instagram.com/vartiable/">
@@ -42,10 +84,10 @@ export default function Contact({ pageContent }) {
                 Spotify
               </Link>
             </div>
-            <span className="text-center">
+            <span className="md:text-center">
               Rte de la Fonderie 2, 1700 Fribourg
             </span>
-            <div className="flex flex-col text-right">
+            <div className="flex flex-col md:text-right">
               <Link href="mailto:bonjour@vartiable.com?subject=Bonjour la vie !">
                 bonjour@vartiable.com
               </Link>
@@ -54,10 +96,11 @@ export default function Contact({ pageContent }) {
           </div>
           <div className="flex justify-center">
             <Button action={() => setContactForm(!contactForm)}>
-              PLANIFIER SON CAFÉ
+              {pageContent.story.content.Button}
             </Button>
           </div>
           <motion.form
+            onSubmit={handleSubmit}
             animate={contactForm ? "open" : "closed"}
             initial="closed"
             variants={{
@@ -78,10 +121,11 @@ export default function Contact({ pageContent }) {
               },
             }}
             className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-0 md:m-12 border border-midnight"
-            onSubmit={(e) => e.preventDefault()}
           >
             <div className="border-b border-midnight p-8 flex justify-between items-center">
-              <h2 className="text-3xl uppercase">Claim your coffee time</h2>
+              <h2 className="text-3xl uppercase">
+                {pageContent.story.content.FormTitle}
+              </h2>
               <div className="flex gap-2">
                 <button>
                   <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
@@ -152,21 +196,27 @@ export default function Contact({ pageContent }) {
               <div className="w-full grid grid-cols-2 gap-4">
                 <input
                   type="text"
-                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={pageContent.story.content.Field1}
                   className="p-4 bg-transparent border border-midnight"
                 />
                 <input
                   type="text"
-                  placeholder="Name"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={pageContent.story.content.Field2}
                   className="p-4 bg-transparent border border-midnight"
                 />
               </div>
               <textarea
-                placeholder="Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder={pageContent.story.content.Field3}
                 className="p-4 bg-transparent border border-midnight"
               ></textarea>
               <div className="flex justify-end">
-                <Button>Send</Button>
+                <Button>{pageContent.story.content.Button}</Button>
               </div>
             </div>
           </motion.form>

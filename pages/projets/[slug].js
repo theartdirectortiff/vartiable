@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import Container from "@/components/container";
 import { getAllPostsWithSlug, getPost } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
 
 import localFont from "next/font/local";
 import Footer from "@/components/footer";
@@ -15,20 +14,21 @@ export default function Post({ post, preview }) {
   // }
   return (
     <>
+      <Head>
+        <title>VART’IABLE | Agence Créative</title>
+        <meta
+          name="description"
+          content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
+        />
+      </Head>
       {router.isFallback ? (
         <h1>Loading…</h1>
       ) : (
         <>
           <article>
-            <Head>
-              <title>
-                {post.content.title} | Next.js Blog Example with {CMS_NAME}
-              </title>
-              <meta property="og:image" content={post.content.image} />
-            </Head>
             <section className="py-48">
               <Container>
-                <h1 className="text-romance dark:text-tournesol text-6xl uppercase">
+                <h1 className="dark:text-tournesol text-romance text-5xl md:text-[6vw] uppercase leading-tight font-bold">
                   {post.content.ProjectName}
                 </h1>
                 {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}
@@ -51,7 +51,7 @@ export default function Post({ post, preview }) {
               <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
                 <div>
                   <span
-                    className={`${courierNew.className} uppercase opacity-50`}
+                    className={`${courierNew.className} uppercase opacity-50 pb-5 block`}
                   >
                     Description
                   </span>
@@ -108,6 +108,7 @@ export default function Post({ post, preview }) {
             </Container>
             <Footer
               title={post.content.FooterSectionTitle}
+              cta={post.content.FooterCallToAction}
               image={post.content.FooterSectionImage.filename}
             />
           </article>
