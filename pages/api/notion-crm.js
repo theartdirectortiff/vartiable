@@ -6,16 +6,15 @@ const notion = new Client({
 });
 
 export default async function handler(req, res) {
-  const { name } = req.body;
+  const { name, email, message } = req.body;
 
-  const response = await notion.pages
-    .create({
+  try {
+    await notion.pages.create({
       parent: {
-        type: "database_id",
         database_id: notionDatabase,
       },
       properties: {
-        Nom: {
+        Name: {
           title: [
             {
               text: {
@@ -24,14 +23,30 @@ export default async function handler(req, res) {
             },
           ],
         },
+        Email: {
+          email,
+        },
       },
-    })
-    .then(() => {
-      res.status(200).json({ message: "Message sent successfully" });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: "Server Err" });
+      children: [
+        {
+          object: "block",
+          paragraph: {
+            rich_text: [
+              {
+                text: {
+                  content: message,
+                },
+              },
+            ],
+          },
+        },
+      ],
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Err" });
+    return;
+  }
 
   res.status(200).json({ message: "Message sent successfully" });
 }

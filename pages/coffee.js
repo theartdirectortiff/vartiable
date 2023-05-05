@@ -8,6 +8,7 @@ import Head from "next/head";
 
 export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
+  const [error, setError] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -21,13 +22,13 @@ export default function Contact({ pageContent }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, email, message }),
       });
 
       if (res.ok) {
-        console.log("Message sent successfully");
+        setContactForm(false);
       } else {
-        console.error("Error sending message:", res.statusText);
+        setError(true);
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -203,7 +204,14 @@ export default function Contact({ pageContent }) {
                 className="p-4 bg-transparent border border-midnight"
               ></textarea>
               <div className="flex justify-end">
-                <Button>{pageContent.story.content.Button}</Button>
+                <div className="flex gap-4 items-center">
+                  {error ? (
+                    <span className="text-red-500">
+                      Une erreur est survenue.
+                    </span>
+                  ) : null}
+                  <Button>{pageContent.story.content.Button}</Button>
+                </div>
               </div>
             </div>
           </motion.form>
