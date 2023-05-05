@@ -27,7 +27,7 @@ export default function Post({ post, preview }) {
             <section className="h-screen">
               <Container>
                 <div className="flex flex-col justify-between h-screen py-32">
-                  <h1 className="dark:text-tournesol text-romance text-5xl md:text-[6vw] uppercase leading-tight font-bold">
+                  <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
                     {post.content.Title}
                   </h1>
                   <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
