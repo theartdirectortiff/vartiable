@@ -26,7 +26,7 @@ export default function Post({ post, preview }) {
       ) : (
         <>
           <article>
-            <section className="py-48">
+            <section className="py-48" id="start">
               <Container>
                 <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
                   {post.content.ProjectName}

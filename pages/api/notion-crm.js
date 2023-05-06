@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 
-const notionDatabase = "f261707589924b9597e9d28fc838eaa3";
+const notionDatabase = "ee277c7bbf6d411d8866dfbb1b1599f7";
 const notion = new Client({
   auth: process.env.NOTION_API_SECRET,
 });
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         database_id: notionDatabase,
       },
       properties: {
-        Name: {
+        Nom: {
           title: [
             {
               text: {

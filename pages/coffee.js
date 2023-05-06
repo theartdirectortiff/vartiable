@@ -53,7 +53,7 @@ export default function Contact({ pageContent }) {
             {pageContent.story.content.Subtitle}
           </p>
           <div
-            className={` text-white grid sm:grid-cols-1 md:grid-cols-3 gap-8 md:gap-32 p-10 opacity-50 uppercase`}
+            className={` text-black dark:text-white grid sm:grid-cols-1 md:grid-cols-3 gap-8 md:gap-32 p-10 opacity-50 uppercase`}
           >
             <div className="flex flex-col">
               <Link target="_blank" href="https://www.instagram.com/vartiable/">
@@ -187,21 +187,21 @@ export default function Contact({ pageContent }) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={pageContent.story.content.Field1}
-                  className="p-4 bg-transparent border border-midnight"
+                  className="p-4 bg-transparent border border-gray-500 dark:border-midnight"
                 />
                 <input
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={pageContent.story.content.Field2}
-                  className="p-4 bg-transparent border border-midnight"
+                  className="p-4 bg-transparent border border-gray-500 dark:border-midnight"
                 />
               </div>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={pageContent.story.content.Field3}
-                className="p-4 bg-transparent border border-midnight"
+                className="p-4 bg-transparent border border-gray-500 dark:border-midnight"
               ></textarea>
               <div className="flex justify-end">
                 <div className="flex gap-4 items-center">

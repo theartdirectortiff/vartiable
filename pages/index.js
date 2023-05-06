@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Button from "@/components/Button";
 import Footer from "@/components/footer";
+import { useTheme } from "next-themes";
 
 import localFont from "next/font/local";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
@@ -23,6 +24,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
   const handleDrag = (event, info) => {
     setCurrentIndex(Math.round(-info.offset.x / sliderWidth));
   };
+
+  const { theme, setTheme } = useTheme();
+
   return (
     <>
       <Head>
@@ -44,11 +48,15 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           loop
         >
           <source
-            src={pageContent.story.content.Video.filename}
+            src={
+              theme === "light"
+                ? pageContent.story.content.Video.filename
+                : pageContent.story.content.VideoLight?.filename
+            }
             type="video/mp4"
           ></source>
         </motion.video>
-        <div className="h-screen relative flex flex-col justify-end mb-44 md:mb-16 z-40">
+        <div className="h-screen relative flex flex-col justify-end mb-60 md:mb-32 z-40">
           <div className="w-screen flex justify-center">
             <Button href="/#start">
               {pageContent.story.content.HomeButton}
@@ -93,7 +101,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                         className="w-full object-cover aspect-square pointer-events-none rounded-md"
                       />
                       <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10">
-                        <Button href={stry.full_slug}>View Project</Button>
+                        <Button href={`${stry.full_slug}#start`}>
+                          {pageContent.story.content.ViewProjectButton}
+                        </Button>
                       </div>
                     </div>
                   </motion.div>
