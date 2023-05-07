@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "@react-three/drei";
@@ -24,14 +24,16 @@ function Scene({ objref }) {
   return (
     <>
       <ambientLight intensity={0.65} />
-      <primitive
-        ref={objref}
-        position={[0, -100, 0]}
-        scale={[1, 1, 1]}
-        object={gltf.scene}
-        receiveShadow
-        castShadow
-      />
+      <Suspense fallback={<span>Loading...</span>}>
+        <primitive
+          ref={objref}
+          position={[0, -100, 0]}
+          scale={[1, 1, 1]}
+          object={gltf.scene}
+          receiveShadow
+          castShadow
+        />
+      </Suspense>
     </>
   );
 }
@@ -145,7 +147,7 @@ export default function Projects({ allPosts, locale }) {
                 },
               }}
               key={idx}
-              className="w-48 h-48 bg-black rounded-md project-item overflow-hidden border-2 border-gray-200 dark:border-gray-700"
+              className="w-32 h-32 md:w-48 md:h-48 bg-black rounded-md project-item overflow-hidden border-2 border-gray-200 dark:border-gray-700"
             >
               <Link href={prjct.full_slug}>
                 <img
