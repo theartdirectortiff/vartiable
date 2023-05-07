@@ -1,7 +1,6 @@
 import Container from "@/components/container";
 import { getAllPosts, getAllServices, getPage } from "@/lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "@/lib/constants";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -12,7 +11,6 @@ import { useTheme } from "next-themes";
 import localFont from "next/font/local";
 import Image from "next/image";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
-// const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
 
 export default function Index({ allPosts, pageContent, allServices, locale }) {
   const [sliderWidth, setsliderWidth] = useState();
@@ -46,11 +44,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
           loop
         >
           <source
-            src={
-              theme === "light"
-                ? pageContent.story.content.Video.filename
-                : pageContent.story.content.VideoLight?.filename
-            }
+            src={pageContent.story.content.Video.filename}
             type="video/mp4"
           ></source>
         </motion.video>
@@ -65,7 +59,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
       <section className="py-32 w-screen overflow-hidden" id="start">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="dark:text-tournesol text-romance text-[13vw] md:text-6xl uppercase leading-tight">
+            <h2 className="dark:text-tournesol text-romance text-[13vw] md:text-6xl uppercase font-medium leading-tight">
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
             <div className="flex flex-col gap-4 items-start">
@@ -98,7 +92,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
                         src={`https:${stry.content.ProjectThumbnail}`}
                         className="w-full object-cover aspect-square pointer-events-none rounded-md bg-gray-900"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10 text-center md:opacity-0 group-hover:opacity-100 transition-all duration-200">
+                      <div className="absolute bottom-0 w-full justify-center flex p-10 text-center md:opacity-0 group-hover:opacity-100 transition-all duration-200">
                         <Button href={`${stry.full_slug}#start`}>
                           {pageContent.story.content.ViewProjectButton}
                         </Button>
@@ -113,7 +107,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
       </section>
       <section className="py-32" id="services">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] md:text-[6vw] uppercase leading-tight">
+          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[6vw] uppercase leading-tight">
             {pageContent.story.content.ServiceSectionTitle}
           </h1>
         </Container>
@@ -127,9 +121,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
                 <span>Service</span>
               </div>
 
-              <span>
-                {locale === "fr" ? "Jettez un coup d’oeil" : "Check it out"}
-              </span>
+              <span>{locale === "fr" ? "Naviguer" : "Check it out"}</span>
             </div>
           </Container>
           {allServices.stories.map((srvc, idx) => (

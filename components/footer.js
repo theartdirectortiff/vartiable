@@ -36,7 +36,7 @@ export default function Footer({ title, image, cta }) {
             <Link href="mailto:bonjour@vartiable.com?subject=Bonjour la vie !">
               bonjour@vartiable.com
             </Link>
-            <Link href="tel:0791571767">0791571767</Link>
+            <Link href="tel:0791571767">+41791571767</Link>
           </div>
         </div>
         <h1 className="text-white text-center font-semibold text-5xl md:text-[5vw] py-16 uppercase leading-tight w-full md:w-5/6 m-auto">

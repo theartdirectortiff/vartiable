@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import { getPage } from "@/lib/api";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
@@ -13,8 +14,20 @@ export default function Contact({ pageContent }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const router = useRouter();
+  const { locale } = router;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name || !email || !message) {
+      setError(
+        locale === "fr"
+          ? "Veuillez remplir tous les champs"
+          : "Please complete all fields"
+      );
+      return;
+    }
 
     try {
       const res = await fetch("/api/notion-crm", {
@@ -28,7 +41,9 @@ export default function Contact({ pageContent }) {
       if (res.ok) {
         setContactForm(false);
       } else {
-        setError(true);
+        setError(
+          locale === "fr" ? "Une erreur est survenue" : "An error occurred"
+        );
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -56,7 +71,7 @@ export default function Contact({ pageContent }) {
           <div
             className={` text-black dark:text-white grid sm:grid-cols-1 md:grid-cols-3 gap-8 md:gap-32 p-10 opacity-50 uppercase`}
           >
-            <div className="flex flex-col">
+            <div className="flex md:flex-col justify-between">
               <Link target="_blank" href="https://www.instagram.com/vartiable/">
                 Instagram
               </Link>
@@ -73,23 +88,27 @@ export default function Contact({ pageContent }) {
                 Spotify
               </Link>
             </div>
-            <span className="md:text-center">
+            <span className="text-center">
               Rte de la Fonderie 2, 1700 Fribourg
             </span>
-            <div className="flex flex-col md:text-right">
+            <div className="flex flex-col md:text-right text-center">
               <Link href="mailto:bonjour@vartiable.com?subject=Bonjour la vie !">
                 bonjour@vartiable.com
               </Link>
-              <Link href="tel:0791571767">0791571767</Link>
+              <Link href="tel:0791571767">+41791571767</Link>
             </div>
           </div>
           <div className="flex justify-center">
-            <Button action={() => setContactForm(!contactForm)}>
+            <Button
+              action={() => {
+                setContactForm(!contactForm);
+                setError(false);
+              }}
+            >
               {pageContent.story.content.Button}
             </Button>
           </div>
-          <motion.form
-            onSubmit={handleSubmit}
+          <motion.div
             animate={contactForm ? "open" : "closed"}
             initial="closed"
             variants={{
@@ -115,8 +134,8 @@ export default function Contact({ pageContent }) {
               <h2 className="text-3xl uppercase">
                 {pageContent.story.content.FormTitle}
               </h2>
-              <div className="flex gap-2">
-                <button>
+              <div className="flex gap-2 items-center">
+                <button onClick={() => setContactForm(!contactForm)}>
                   <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                     <path
                       d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
@@ -134,7 +153,7 @@ export default function Contact({ pageContent }) {
                     />
                   </svg>
                 </button>
-                <button>
+                <button onClick={() => setContactForm(!contactForm)}>
                   <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                     <path
                       d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"
@@ -181,7 +200,10 @@ export default function Contact({ pageContent }) {
                 </button>
               </div>
             </div>
-            <div className="w-full grid grid-cols-1 gap-4 p-8">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full grid grid-cols-1 gap-4 p-8"
+            >
               <div className="w-full grid grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -206,16 +228,12 @@ export default function Contact({ pageContent }) {
               ></textarea>
               <div className="flex justify-end">
                 <div className="flex gap-4 items-center">
-                  {error ? (
-                    <span className="text-red-500">
-                      Une erreur est survenue.
-                    </span>
-                  ) : null}
+                  {error ? <span className="text-red-500">{error}</span> : null}
                   <Button>{pageContent.story.content.Button}</Button>
                 </div>
               </div>
-            </div>
-          </motion.form>
+            </form>
+          </motion.div>
         </Container>
       </div>
     </>

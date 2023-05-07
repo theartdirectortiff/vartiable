@@ -32,7 +32,7 @@ function Scene({ objref }) {
   );
 }
 
-export default function Projects({ allPosts }) {
+export default function Projects({ allPosts, locale }) {
   const [projectsList, setProjectsList] = useState(false);
   const tl = gsap.timeline({ paused: true });
 
@@ -70,33 +70,6 @@ export default function Projects({ allPosts }) {
   const dom = useRef();
   const macObjRef = useRef();
   const handleProjectsListClick = () => {
-    // tl.to(macObjRef.current.scale, {
-    //   x: 0,
-    //   y: 0,
-    //   z: 0,
-    //   duration: 0.5,
-    //   ease: "power2.out",
-    // })
-    //   .to(
-    //     macObjRef.current.rotation,
-    //     {
-    //       y: (180 * Math.PI) / 180,
-    //       duration: 0.5,
-    //       ease: "power2.out",
-    //     },
-    //     "-=0.5"
-    //   )
-    // .to(
-    //   dom.current,
-    //   {
-    //     opacity: 0,
-    //     duration: 0.5,
-    //     ease: "power2.out",
-    //   },
-    //   "-=1"
-    // );
-    // tl.play();
-
     setProjectsList(!projectsList);
   };
 
@@ -127,8 +100,12 @@ export default function Projects({ allPosts }) {
         className="fixed bottom-0 left-0 right-0 flex flex-col items-center"
       >
         <div className="flex gap-2">
-          <Button action={getRandomProjects}>Random Choice</Button>
-          <Button action={handleProjectsListClick}>Projects List</Button>
+          <Button action={getRandomProjects}>
+            {locale === "fr" ? "Choix aléatoire" : "Random choice"}
+          </Button>
+          <Button action={handleProjectsListClick}>
+            {locale === "fr" ? "Liste de projets" : "Projects list"}
+          </Button>
         </div>
         <motion.div
           className="flex gap-2 py-8"
@@ -201,9 +178,11 @@ export default function Projects({ allPosts }) {
         }}
       >
         <div className="border-b border-midnight p-8 flex justify-between items-center">
-          <h2 className="text-3xl uppercase">Projects List</h2>
-          <div className="flex gap-2">
-            <button>
+          <h2 className="text-3xl uppercase">
+            {locale === "fr" ? "Liste de projets" : "Projects list"}
+          </h2>
+          <div className="flex gap-2 items-center">
+            <button onClick={() => setProjectsList(!projectsList)}>
               <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                 <path
                   d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
@@ -221,7 +200,7 @@ export default function Projects({ allPosts }) {
                 />
               </svg>
             </button>
-            <button>
+            <button onClick={() => setProjectsList(!projectsList)}>
               <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                 <path
                   d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"
@@ -243,12 +222,7 @@ export default function Projects({ allPosts }) {
                 />
               </svg>
             </button>
-            <button
-              onClick={() => {
-                tl.pause();
-                setProjectsList(!projectsList);
-              }}
-            >
+            <button onClick={() => setProjectsList(!projectsList)}>
               <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
                 <path
                   d="M0.515625 0.257812H51.9995V51.7417H0.515625V0.257812Z"
@@ -300,6 +274,6 @@ export default function Projects({ allPosts }) {
 export async function getStaticProps({ preview = null, locale }) {
   const allPosts = (await getAllPosts(locale)) || [];
   return {
-    props: { allPosts, preview },
+    props: { allPosts, locale },
   };
 }

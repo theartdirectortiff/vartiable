@@ -25,7 +25,9 @@ export default function About({ pageContent }) {
             </h1>
             <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
               <span className="hidden md:block"></span>
-              <p>{pageContent.story.content.Description}</p>
+              <p className="indent-24">
+                {pageContent.story.content.Description}
+              </p>
             </div>
           </div>
         </Container>

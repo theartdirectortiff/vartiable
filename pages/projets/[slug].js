@@ -35,19 +35,28 @@ export default function Post({ post, preview }) {
                 {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}
               </Container>
             </section>
-            <video
-              className="w-screen h-screen object-cover"
-              autoPlay
-              muted
-              playsInline
-              loop
-              poster={post.content.ProjectThumbnail}
-            >
-              <source
+            {post.content.ProjectMain.filename.endsWith(".mp4") ? (
+              <video
+                className="w-screen h-screen object-cover"
+                autoPlay
+                muted
+                playsInline
+                loop
+                controls
+                poster={post.content.ProjectThumbnail}
+              >
+                <source
+                  src={post.content.ProjectMain.filename}
+                  type="video/mp4"
+                ></source>
+              </video>
+            ) : (
+              <img
                 src={post.content.ProjectMain.filename}
-                type="video/mp4"
-              ></source>
-            </video>
+                className="w-full h-screen object-cover"
+              />
+            )}
+
             <Container>
               <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
                 <div>
@@ -73,7 +82,7 @@ export default function Post({ post, preview }) {
                     >
                       Service
                     </span>
-                    <p>{post.content.Service}</p>
+                    <p className="text-right">{post.content.Service}</p>
                   </div>
                   <div className="flex justify-between -mt-[1px] p-4 border-y border-y-gray-600">
                     <span

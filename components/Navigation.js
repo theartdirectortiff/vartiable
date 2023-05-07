@@ -1,4 +1,4 @@
-import { Moon, Music, Pause, Play, Sun } from "lucide-react";
+import { Flag, Moon, Music, Pause, Play, Sun } from "lucide-react";
 import Container from "./container";
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 
 import localFont from "next/font/local";
+import { Player } from "@lottiefiles/react-lottie-player";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
 
 export default function Navigation() {
@@ -103,8 +104,16 @@ export default function Navigation() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="w-screen h-screen top-0 left-0 bg-midnight fixed cursor-progress z-50"
-              />
+                className="w-screen h-screen top-0 bottom-0 right-0 left-0 bg-midnight fixed flex items-center justify-center cursor-progress z-50"
+              >
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets10.lottiefiles.com/packages/lf20_eh67QHXzWy.json"
+                  style={{ height: "300px", width: "300px" }}
+                  className="grayscale"
+                ></Player>
+              </motion.div>
             )}
           </AnimatePresence>
 
@@ -112,15 +121,15 @@ export default function Navigation() {
             <motion.button
               layoutId="cacs"
               onClick={() => setPlayer(true)}
-              className="px-4 py-1 bg-white text-midnight rounded-full"
+              className="px-4 py-1 dark:bg-white bg-midnight dark:text-midnight text-white rounded-full"
             >
-              <Music />
+              <Music className="w-5 h-5" />
             </motion.button>
             <AnimatePresence>
               {player && (
                 <motion.div
                   layoutId="cacs"
-                  className="p-6 flex flex-col justify-center gap-4 items-center w-full min-h-32 rounded-xl bg-white text-midnight absolute top-0 left-0 z-50"
+                  className="p-6 flex flex-col justify-center gap-4 items-center w-full min-h-32 rounded-xl dark:bg-white bg-midnight dark:text-midnight text-white absolute top-0 left-0 z-50"
                 >
                   <button
                     className="absolute m-6 left-0 top-0"
@@ -151,7 +160,7 @@ export default function Navigation() {
                   <img
                     src="/images/MUSIC-COVER-WEBSITE.jpg"
                     alt=""
-                    className="w-[150px] h-[150px] bg-red-500 rounded-md"
+                    className="w-[150px] h-[150px] bg-gray-500 rounded-md"
                   />
                   <div className="w-full h-2 bg-gray-300 rounded-full overflow-hidden">
                     <div
@@ -173,11 +182,11 @@ export default function Navigation() {
               )}
             </AnimatePresence>
             <button
-              className="px-1 py-1 bg-white text-midnight rounded-full flex gap-1 items-center"
+              className="px-1 py-1 dark:bg-white bg-midnight dark:text-midnight text-white rounded-full flex gap-1 items-center"
               onClick={() => setTheme(theme == "light" ? "dark" : "light")}
             >
-              <Moon />
-              <div className="w-10 rounded-full border border-gray-200 relative">
+              <Moon className="w-5 h-5" />
+              <div className="w-10 rounded-full border dark:border-gray-200 border-gray-500 relative">
                 <motion.div
                   animate={theme === "dark" ? "open" : "closed"}
                   initial="closed"
@@ -198,19 +207,20 @@ export default function Navigation() {
                       },
                     },
                   }}
-                  className="w-4 h-4 m-[2px] rounded-full bg-midnight"
+                  className="w-4 h-4 m-[2px] rounded-full dark:bg-midnight bg-white"
                 ></motion.div>
               </div>
-              <Sun />
+              <Sun className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleChangeLocale(locale === "en" ? "fr" : "en")}
-              className="px-4 py-1 bg-white text-midnight rounded-full hidden md:block"
+              className="px-3 gap-1 py-1 items-center dark:bg-white bg-midnight dark:text-midnight text-white rounded-full hidden md:flex"
             >
-              Fr / En
+              <Flag className="w-5 h-5" />
+              {locale === "fr" ? "En" : "Fr"}
             </button>
             <motion.button
-              className="px-4 py-1 bg-white text-midnight rounded-3xl"
+              className="px-4 py-1 dark:bg-white bg-midnight dark:text-midnight text-white rounded-3xl"
               onClick={() => setMenu(!menu)}
             >
               Menu
@@ -239,84 +249,98 @@ export default function Navigation() {
             className="p-6 h-screen w-full md:w-1/3 absolute bottom-0 right-0 top-0 flex flex-col gap-6 dark:bg-white dark:text-midnight text-white bg-midnight"
           >
             <div className="m-auto w-full flex flex-col gap-4">
-              <div className="flex gap-2">
-                <button onClick={() => setMenu(!menu)}>
-                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
-                    <path
-                      d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M0 0.257812V-1.09703H-1.35484V0.257812H0ZM51.4839 0.257812H52.8387V-1.09703H51.4839V0.257812ZM51.4839 51.7417V57.161H52.8387V51.7417H51.4839ZM0 51.7417H-1.35484V57.161H0V51.7417ZM0 1.61265H51.4839V-1.09703H0V1.61265ZM50.129 0.257812V51.7417H52.8387V0.257812H50.129ZM51.4839 46.3223H0V57.161H51.4839V46.3223ZM1.35484 51.7417V0.257812H-1.35484V51.7417H1.35484Z"
-                      fill="#101010"
-                      mask="url(#path-1-inside-1_159_414)"
-                    />
-                    <path
-                      d="M12.8711 36.1602H38.613"
-                      stroke="#101010"
-                      stroke-width="4.06452"
-                    />
-                  </svg>
-                </button>
-                <button onClick={() => setMenu(!menu)}>
-                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
-                    <path
-                      d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M0.257812 0.257812V-1.09703H-1.09703V0.257812H0.257812ZM51.7417 0.257812H53.0965V-1.09703H51.7417V0.257812ZM51.7417 51.7417V57.161H53.0965V51.7417H51.7417ZM0.257812 51.7417H-1.09703V57.161H0.257812V51.7417ZM0.257812 1.61265H51.7417V-1.09703H0.257812V1.61265ZM50.3868 0.257812V51.7417H53.0965V0.257812H50.3868ZM51.7417 46.3223H0.257812V57.161H51.7417V46.3223ZM1.61265 51.7417V0.257812H-1.09703V51.7417H1.61265Z"
-                      fill="#101010"
-                      mask="url(#path-1-inside-1_159_411)"
-                    />
-                    <rect
-                      x="15.1612"
-                      y="14.4854"
-                      width="21.6774"
-                      height="21.6774"
-                      fill="white"
-                      stroke="#101010"
-                      stroke-width="4.06452"
-                    />
-                  </svg>
-                </button>
-                <button onClick={() => setMenu(!menu)}>
-                  <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
-                    <path
-                      d="M0.515625 0.257812H51.9995V51.7417H0.515625V0.257812Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M0.515625 0.257812V-1.09703H-0.839214V0.257812H0.515625ZM51.9995 0.257812H53.3543V-1.09703H51.9995V0.257812ZM51.9995 51.7417V57.161H53.3543V51.7417H51.9995ZM0.515625 51.7417H-0.839214V57.161H0.515625V51.7417ZM0.515625 1.61265H51.9995V-1.09703H0.515625V1.61265ZM50.6447 0.257812V51.7417H53.3543V0.257812H50.6447ZM51.9995 46.3223H0.515625V57.161H51.9995V46.3223ZM1.87046 51.7417V0.257812H-0.839214V51.7417H1.87046Z"
-                      fill="#101010"
-                      mask="url(#path-1-inside-1_159_417)"
-                    />
-                    <path
-                      d="M16.7734 34.7148L34.9757 16.5125"
-                      stroke="#101010"
-                      stroke-width="4.06452"
-                    />
-                    <path
-                      d="M17.0684 16.8086L35.2707 35.0109"
-                      stroke="#101010"
-                      stroke-width="4.06452"
-                    />
-                  </svg>
+              <div className="flex justify-between">
+                <div className="flex gap-2 items-center">
+                  <button onClick={() => setMenu(!menu)}>
+                    <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                      <path
+                        d="M0 0.257812H51.4839V51.7417H0V0.257812Z"
+                        fill="white"
+                      />
+                      <path
+                        d="M0 0.257812V-1.09703H-1.35484V0.257812H0ZM51.4839 0.257812H52.8387V-1.09703H51.4839V0.257812ZM51.4839 51.7417V57.161H52.8387V51.7417H51.4839ZM0 51.7417H-1.35484V57.161H0V51.7417ZM0 1.61265H51.4839V-1.09703H0V1.61265ZM50.129 0.257812V51.7417H52.8387V0.257812H50.129ZM51.4839 46.3223H0V57.161H51.4839V46.3223ZM1.35484 51.7417V0.257812H-1.35484V51.7417H1.35484Z"
+                        fill="#101010"
+                        mask="url(#path-1-inside-1_159_414)"
+                      />
+                      <path
+                        d="M12.8711 36.1602H38.613"
+                        stroke="#101010"
+                        stroke-width="4.06452"
+                      />
+                    </svg>
+                  </button>
+                  <button onClick={() => setMenu(!menu)}>
+                    <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                      <path
+                        d="M0.257812 0.257812H51.7417V51.7417H0.257812V0.257812Z"
+                        fill="white"
+                      />
+                      <path
+                        d="M0.257812 0.257812V-1.09703H-1.09703V0.257812H0.257812ZM51.7417 0.257812H53.0965V-1.09703H51.7417V0.257812ZM51.7417 51.7417V57.161H53.0965V51.7417H51.7417ZM0.257812 51.7417H-1.09703V57.161H0.257812V51.7417ZM0.257812 1.61265H51.7417V-1.09703H0.257812V1.61265ZM50.3868 0.257812V51.7417H53.0965V0.257812H50.3868ZM51.7417 46.3223H0.257812V57.161H51.7417V46.3223ZM1.61265 51.7417V0.257812H-1.09703V51.7417H1.61265Z"
+                        fill="#101010"
+                        mask="url(#path-1-inside-1_159_411)"
+                      />
+                      <rect
+                        x="15.1612"
+                        y="14.4854"
+                        width="21.6774"
+                        height="21.6774"
+                        fill="white"
+                        stroke="#101010"
+                        stroke-width="4.06452"
+                      />
+                    </svg>
+                  </button>
+                  <button onClick={() => setMenu(!menu)}>
+                    <svg width="25" height="25" viewBox="0 0 52 52" fill="none">
+                      <path
+                        d="M0.515625 0.257812H51.9995V51.7417H0.515625V0.257812Z"
+                        fill="white"
+                      />
+                      <path
+                        d="M0.515625 0.257812V-1.09703H-0.839214V0.257812H0.515625ZM51.9995 0.257812H53.3543V-1.09703H51.9995V0.257812ZM51.9995 51.7417V57.161H53.3543V51.7417H51.9995ZM0.515625 51.7417H-0.839214V57.161H0.515625V51.7417ZM0.515625 1.61265H51.9995V-1.09703H0.515625V1.61265ZM50.6447 0.257812V51.7417H53.3543V0.257812H50.6447ZM51.9995 46.3223H0.515625V57.161H51.9995V46.3223ZM1.87046 51.7417V0.257812H-0.839214V51.7417H1.87046Z"
+                        fill="#101010"
+                        mask="url(#path-1-inside-1_159_417)"
+                      />
+                      <path
+                        d="M16.7734 34.7148L34.9757 16.5125"
+                        stroke="#101010"
+                        stroke-width="4.06452"
+                      />
+                      <path
+                        d="M17.0684 16.8086L35.2707 35.0109"
+                        stroke="#101010"
+                        stroke-width="4.06452"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <button
+                  onClick={() =>
+                    handleChangeLocale(locale === "en" ? "fr" : "en")
+                  }
+                  className="px-3 py-[3px] bg-white text-midnight border border-midnight border-b-[3px] md:hidden block"
+                >
+                  Fr / En
                 </button>
               </div>
-              <h2 className="text-5xl uppercase">Navigate through OUR world</h2>
+              <h2 className="text-5xl uppercase">
+                {locale === "fr"
+                  ? "Naviguez à travers notre univers"
+                  : "Navigate through our world"}
+              </h2>
               <div className="py-6 flex flex-col">
                 <Link
                   href="/projets"
                   className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
                 >
-                  Projets
+                  {locale === "fr" ? "Projets" : "Projects"}
                 </Link>
                 <Link
                   href="/about"
                   className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
                 >
-                  Our mission
+                  {locale === "fr" ? "Notre mission" : "Our mission"}
                 </Link>
                 <Link
                   href="/coffee"
@@ -331,24 +355,12 @@ export default function Navigation() {
                 >
                   Services
                 </Link>
-                <div>
-                  {/* <pre>{JSON.stringify(allServices, 0, 4)}</pre> */}
-                  <div className="flex items-center gap-8 relative group-hover:text-midnight transition-all duration-200">
-                    {/* {allServices.stories.map((storie, idx) => (
-                            <Link
-                              href={storie.full_slug}
-                              className="text-3xl uppercase border-y border-gray-300 py-2 -mt-[1px]"
-                            >
-                              <h2 className="text-5xl font-bold">{idx + 1}</h2>
-                              <h3 className="md:text-[2vw] text-2xl uppercase">
-                                {storie.content.Title}
-                              </h3>
-                            </Link>
-                          ))} */}
-                  </div>
-                </div>
               </div>
-              <h2 className="text-4xl">Let’s drink a coffee !</h2>
+              <h2 className="text-4xl">
+                {locale === "fr"
+                  ? "Venez boire un café !"
+                  : "Let’s drink a coffee !"}
+              </h2>
               <div
                 className={`${courierNew.className} flex justify-between opacity-50`}
               >
@@ -371,14 +383,6 @@ export default function Navigation() {
                   Spotify
                 </Link>
               </div>
-              <button
-                onClick={() =>
-                  handleChangeLocale(locale === "en" ? "fr" : "en")
-                }
-                className="px-4 py-1 bg-white text-midnight rounded-full md:hidden block"
-              >
-                Fr / En
-              </button>
             </div>
           </motion.div>
         </div>
