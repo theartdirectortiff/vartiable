@@ -151,7 +151,7 @@ export default function Projects({ allPosts, locale }) {
             >
               <Link href={prjct.full_slug}>
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-200"
                   src={prjct.content.ProjectThumbnail}
                   alt={prjct.content.ProjectName}
                 />
