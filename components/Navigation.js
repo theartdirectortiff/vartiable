@@ -371,7 +371,12 @@ export default function Navigation() {
                   Spotify
                 </Link>
               </div>
-              <button className="px-4 py-1 bg-white text-midnight rounded-full md:hidden block">
+              <button
+                onClick={() =>
+                  handleChangeLocale(locale === "en" ? "fr" : "en")
+                }
+                className="px-4 py-1 bg-white text-midnight rounded-full md:hidden block"
+              >
                 Fr / En
               </button>
             </div>

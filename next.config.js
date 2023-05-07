@@ -3,4 +3,7 @@ module.exports = {
     locales: ["en", "fr"],
     defaultLocale: "fr",
   },
+  images: {
+    domains: ["a.storyblok.com"],
+  },
 };

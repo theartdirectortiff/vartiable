@@ -4,28 +4,25 @@ import Head from "next/head";
 import { CMS_NAME } from "@/lib/constants";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import Footer from "@/components/footer";
 import { useTheme } from "next-themes";
 
 import localFont from "next/font/local";
+import Image from "next/image";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
 // const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
 
 export default function Index({ allPosts, pageContent, allServices, locale }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderWidth = 30;
-  const dragConstraints = {
-    right: 0,
-    letf: (allPosts.stories.length - 1) * sliderWidth,
-  };
+  const [sliderWidth, setsliderWidth] = useState();
+  const slider = useRef();
 
-  const handleDrag = (event, info) => {
-    setCurrentIndex(Math.round(-info.offset.x / sliderWidth));
-  };
+  useEffect(() => {
+    setsliderWidth(slider.current.scrollWidth - slider.current.offsetWidth);
+  }, []);
 
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <>
@@ -81,12 +78,10 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
             </div>
           </div>
           <div className="pt-20">
-            <motion.div className="cursor-grab">
+            <motion.div ref={slider} className="cursor-grab">
               <motion.div
                 drag="x"
-                dragConstraints={dragConstraints}
-                // onDrag={handleDrag}
-                // style={{ x: -currentIndex * sliderWidth }}
+                dragConstraints={{ right: 0, left: -sliderWidth }}
                 className="flex gap-4"
               >
                 {allPosts.stories.map((stry, idx) => (
@@ -96,10 +91,12 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
                       onMouseDown={(e) => e.preventDefault()}
                       className="select-none relative"
                     >
-                      <img
+                      <Image
+                        width={400}
+                        height={400}
                         key={idx}
-                        src={stry.content.ProjectThumbnail}
-                        className="w-full object-cover aspect-square pointer-events-none rounded-md"
+                        src={`https:${stry.content.ProjectThumbnail}`}
+                        className="w-full object-cover aspect-square pointer-events-none rounded-md bg-gray-900"
                       />
                       <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10 text-center md:opacity-0 group-hover:opacity-100 transition-all duration-200">
                         <Button href={`${stry.full_slug}#start`}>
