@@ -13,7 +13,7 @@ import localFont from "next/font/local";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
 // const clashDisplay = localFont({ src: "../fonts/ClashDisplay-Medium.ttf" });
 
-export default function Index({ allPosts, pageContent, allServices, preview }) {
+export default function Index({ allPosts, pageContent, allServices, locale }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderWidth = 30;
   const dragConstraints = {
@@ -35,6 +35,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       <section className="h-screen flex items-center relative">
         <motion.video
@@ -89,7 +90,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                 className="flex gap-4"
               >
                 {allPosts.stories.map((stry, idx) => (
-                  <motion.div className="min-w-[300px] max-w-[300px] md:min-w-[500px] md:max-w-[500px] overflow-hidden">
+                  <motion.div className="min-w-[300px] max-w-[300px] md:min-w-[500px] md:max-w-[500px] overflow-hidden group">
                     <div
                       key={idx}
                       onMouseDown={(e) => e.preventDefault()}
@@ -100,7 +101,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                         src={stry.content.ProjectThumbnail}
                         className="w-full object-cover aspect-square pointer-events-none rounded-md"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10 text-center">
+                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10 text-center md:opacity-0 group-hover:opacity-100 transition-all duration-200">
                         <Button href={`${stry.full_slug}#start`}>
                           {pageContent.story.content.ViewProjectButton}
                         </Button>
@@ -115,7 +116,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
       </section>
       <section className="py-32" id="services">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] md:text-[6vw] uppercase  leading-tight">
+          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] md:text-[6vw] uppercase leading-tight">
             {pageContent.story.content.ServiceSectionTitle}
           </h1>
         </Container>
@@ -129,7 +130,9 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                 <span>Service</span>
               </div>
 
-              <span>Check it out</span>
+              <span>
+                {locale === "fr" ? "Jettez un coup d’oeil" : "Check it out"}
+              </span>
             </div>
           </Container>
           {allServices.stories.map((srvc, idx) => (
@@ -177,6 +180,6 @@ export async function getStaticProps({ preview = null, locale }) {
   const pageContent = (await getPage("home", locale)) || [];
   const allServices = (await getAllServices(locale)) || [];
   return {
-    props: { allPosts, pageContent, allServices, preview },
+    props: { allPosts, pageContent, allServices, locale },
   };
 }

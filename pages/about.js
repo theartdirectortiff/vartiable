@@ -15,10 +15,24 @@ export default function About({ pageContent }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
-      <section className="py-48">
+      <section className="h-screen">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-7xl md:text-9xl uppercase leading-tight font-bold md:font-medium">
+          <div className="flex flex-col justify-between h-screen py-32">
+            <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
+              {pageContent.story.content.Title}
+            </h1>
+            <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
+              <span className="hidden md:block"></span>
+              <p>{pageContent.story.content.Description}</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+      {/* <section className="py-48">
+        <Container>
+          <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
             {pageContent.story.content.Title}
           </h1>
           <div className="flex justify-end mt-32">
@@ -32,8 +46,12 @@ export default function About({ pageContent }) {
             </div>
           </div>
         </Container>
-      </section>
-      <Footer title="Yes" image="yes.jpg" cta="Yes" />
+      </section> */}
+      <Footer
+        title={pageContent.story.content.FooterSectionTitle}
+        image={pageContent.story.content.FooterSectionImage.filename}
+        cta={pageContent.story.content.FooterCallToAction}
+      />
     </>
   );
 }

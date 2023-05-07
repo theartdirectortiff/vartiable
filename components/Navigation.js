@@ -17,6 +17,8 @@ export default function Navigation() {
   const [progress, setProgress] = useState(0);
   const audioRef = useRef(null);
 
+  const [isRouting, setIsRouting] = useState(false);
+
   const handleTogglePlay = () => {
     setPlayerStatus(!playerStatus);
     if (playerStatus) {
@@ -42,9 +44,23 @@ export default function Navigation() {
     const handleRouteChange = () => {
       setMenu(false);
     };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    const handleRouteStart = () => {
+      setIsRouting(true);
+    };
+    const handleRouteChangeComplete = () => {
+      setIsRouting(false);
+    };
+    router.events.on("routeChangeStart", handleRouteStart);
+    router.events.on("routeChangeComplete", () => {
+      handleRouteChange();
+      handleRouteChangeComplete();
+    });
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off("routeChangeStart", handleRouteChange);
+      router.events.off("routeChangeComplete", () => {
+        handleRouteChange();
+        handleRouteChangeComplete();
+      });
     };
   }, [router]);
 
@@ -62,7 +78,7 @@ export default function Navigation() {
     <nav className="w-screen flex items-center h-20 fixed z-50">
       <audio
         ref={audioRef}
-        src="audio/NELICK-OCEAN-2022.mp3"
+        src="audio/website_audio_light.mp3"
         onTimeUpdate={handleTimeUpdate}
       />
       <Container>
@@ -80,6 +96,17 @@ export default function Navigation() {
               />
             </svg>
           </Link>
+          <AnimatePresence initial={false}>
+            {isRouting && (
+              <motion.div
+                key="modal"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-screen h-screen top-0 left-0 bg-midnight fixed cursor-progress z-50"
+              />
+            )}
+          </AnimatePresence>
 
           <div className="flex items-center gap-1 relative">
             <motion.button

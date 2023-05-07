@@ -67,7 +67,6 @@ function MyApp({ Component, pageProps }) {
           </div>
         ) : null}
         <Navigation />
-        <PageTransition />
         <Component {...pageProps} />
       </AnimatePresence>
     </ThemeProvider>

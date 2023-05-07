@@ -43,6 +43,7 @@ export default function Contact({ pageContent }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       <div className="top-48 relative">
         <Container>

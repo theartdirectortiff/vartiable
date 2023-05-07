@@ -108,6 +108,7 @@ export default function Projects({ allPosts }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       <Canvas>
         <Scene objref={macObjRef} scale={1} />
@@ -296,8 +297,8 @@ export default function Projects({ allPosts }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPosts(preview)) || [];
+export async function getStaticProps({ preview = null, locale }) {
+  const allPosts = (await getAllPosts(locale)) || [];
   return {
     props: { allPosts, preview },
   };

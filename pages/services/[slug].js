@@ -18,6 +18,7 @@ export default function Post({ post, preview }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       {router.isFallback ? (
         <h1>Loading…</h1>
@@ -53,7 +54,7 @@ export default function Post({ post, preview }) {
               <Container>
                 <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
                   <h2 className="text-romance dark:text-tournesol text-6xl uppercase">
-                    Our purpose
+                    {post.content.DescriptionTitle}
                   </h2>
                   <div>
                     <p>{post.content.Description}</p>

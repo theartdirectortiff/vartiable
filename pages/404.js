@@ -11,6 +11,7 @@ export default function Page() {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       <section className="h-screen flex flex-col items-center justify-center gap-8">
         <h1 className="dark:text-tournesol text-romance text-5xl text-center md:text-[6vw] uppercase leading-tight font-bold">

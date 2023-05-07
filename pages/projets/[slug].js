@@ -20,6 +20,7 @@ export default function Post({ post, preview }) {
           name="description"
           content="Vart’iable est une agence créative ayant pour mission de soutenir activement la communication des entreprises et de concevoir des expériences clients inspirantes, innovantes et mémorables."
         />
+        <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       {router.isFallback ? (
         <h1>Loading…</h1>
@@ -28,7 +29,7 @@ export default function Post({ post, preview }) {
           <article>
             <section className="py-48" id="start">
               <Container>
-                <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
+                <h1 className="dark:text-tournesol text-romance text-5xl md:text-[6vw] uppercase leading-tight font-bold">
                   {post.content.ProjectName}
                 </h1>
                 {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}
