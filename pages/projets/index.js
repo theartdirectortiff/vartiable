@@ -16,14 +16,18 @@ function Scene({ objref }) {
     objref.current.rotation.y += 0.002;
   });
 
-  const gltf = useLoader(GLTFLoader, "/models/macintosh/scene.gltf");
+  const gltf = useLoader(
+    GLTFLoader,
+    "/models/abandoned_vr_gallery_for_design__street_art/scene.gltf"
+  );
 
   return (
     <>
       <ambientLight intensity={0.65} />
       <primitive
         ref={objref}
-        scale={[1.5, 1.5, 1.5]}
+        position={[0, -100, 0]}
+        scale={[1, 1, 1]}
         object={gltf.scene}
         receiveShadow
         castShadow
