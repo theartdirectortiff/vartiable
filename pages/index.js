@@ -163,7 +163,6 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           ))}
         </div>
       </section>
-      <pre>{JSON.stringify(allServices, 0, 4)}</pre>
       <Footer
         title={pageContent.story.content.FooterSectionTitle}
         image={pageContent.story.content.FooterSectionImage.filename}
