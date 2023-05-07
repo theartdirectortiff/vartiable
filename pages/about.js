@@ -38,8 +38,8 @@ export default function About({ pageContent }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const pageContent = (await getPage("mission", preview)) || [];
+export async function getStaticProps({ preview = null, locale }) {
+  const pageContent = (await getPage("mission", locale)) || [];
   return {
     props: { pageContent, preview },
   };

@@ -119,8 +119,8 @@ export default function Post({ post, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
-  const data = await getPost(params.slug);
+export async function getStaticProps({ params, preview = null, locale }) {
+  const data = await getPost(params.slug, locale);
   console.log("data: ", data);
 
   return {

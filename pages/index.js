@@ -100,7 +100,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
                         src={stry.content.ProjectThumbnail}
                         className="w-full object-cover aspect-square pointer-events-none rounded-md"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10">
+                      <div className="absolute bottom-0 left-0 right-0 flex flex-col p-10 text-center">
                         <Button href={`${stry.full_slug}#start`}>
                           {pageContent.story.content.ViewProjectButton}
                         </Button>
@@ -163,6 +163,7 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
           ))}
         </div>
       </section>
+      <pre>{JSON.stringify(allServices, 0, 4)}</pre>
       <Footer
         title={pageContent.story.content.FooterSectionTitle}
         image={pageContent.story.content.FooterSectionImage.filename}
@@ -172,10 +173,10 @@ export default function Index({ allPosts, pageContent, allServices, preview }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const allPosts = (await getAllPosts(preview)) || [];
-  const pageContent = (await getPage("home", preview)) || [];
-  const allServices = (await getAllServices(preview)) || [];
+export async function getStaticProps({ preview = null, locale }) {
+  const allPosts = (await getAllPosts(locale)) || [];
+  const pageContent = (await getPage("home", locale)) || [];
+  const allServices = (await getAllServices(locale)) || [];
   return {
     props: { allPosts, pageContent, allServices, preview },
   };

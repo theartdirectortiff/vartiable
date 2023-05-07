@@ -74,8 +74,8 @@ export default function Post({ post, preview }) {
   );
 }
 
-export async function getStaticProps({ params, preview = null }) {
-  const data = await getService(params.slug);
+export async function getStaticProps({ params, preview = null, locale }) {
+  const data = await getService(params.slug, locale);
   console.log("data: ", data);
 
   return {

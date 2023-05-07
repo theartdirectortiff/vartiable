@@ -221,8 +221,8 @@ export default function Contact({ pageContent }) {
   );
 }
 
-export async function getStaticProps({ preview = null }) {
-  const pageContent = (await getPage("coffee", preview)) || [];
+export async function getStaticProps({ preview = null, locale }) {
+  const pageContent = (await getPage("coffee", locale)) || [];
   return {
     props: { pageContent, preview },
   };

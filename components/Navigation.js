@@ -36,6 +36,7 @@ export default function Navigation() {
   const { theme, setTheme } = useTheme();
 
   const router = useRouter();
+  const { locale } = router;
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -52,6 +53,10 @@ export default function Navigation() {
       setPlayer(false);
     });
   }, []);
+
+  const handleChangeLocale = (newLocale) => {
+    router.push(router.pathname, router.asPath, { locale: newLocale });
+  };
 
   return (
     <nav className="w-screen flex items-center h-20 fixed z-50">
@@ -84,7 +89,7 @@ export default function Navigation() {
             >
               <Music />
             </motion.button>
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {player && (
                 <motion.div
                   layoutId="cacs"
@@ -171,7 +176,10 @@ export default function Navigation() {
               </div>
               <Sun />
             </button>
-            <button className="px-4 py-1 bg-white text-midnight rounded-full hidden md:block">
+            <button
+              onClick={() => handleChangeLocale(locale === "en" ? "fr" : "en")}
+              className="px-4 py-1 bg-white text-midnight rounded-full hidden md:block"
+            >
               Fr / En
             </button>
             <motion.button
