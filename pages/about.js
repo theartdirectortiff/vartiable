@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 import Head from "next/head";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
 
-export default function About({ pageContent }) {
+export default function About({ pageContent, locale }) {
   return (
     <>
       <Head>
@@ -32,23 +32,30 @@ export default function About({ pageContent }) {
           </div>
         </Container>
       </section>
-      {/* <section className="py-48">
+      <video
+        className="w-screen h-screen object-cover"
+        autoPlay
+        muted
+        playsInline
+        loop
+      >
+        <source
+          src={pageContent.story.content.Video.filename}
+          type="video/mp4"
+        ></source>
+      </video>
+      <section className="py-32">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
-            {pageContent.story.content.Title}
-          </h1>
-          <div className="flex justify-end mt-32">
-            <div className="w-full md:w-2/3">
-              <span
-                className={`${courierNew.className} uppercase opacity-50 pb-5 block`}
-              >
-                Description
-              </span>
-              <p>{pageContent.story.content.Description}</p>
+          <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
+            <h2 className="text-romance dark:text-tournesol text-6xl uppercase">
+              {locale === "fr" ? "Notre mission" : "Our mission"}
+            </h2>
+            <div>
+              <p>{pageContent.story.content.LongDescription}</p>
             </div>
           </div>
         </Container>
-      </section> */}
+      </section>
       <Footer
         title={pageContent.story.content.FooterSectionTitle}
         image={pageContent.story.content.FooterSectionImage.filename}
@@ -61,6 +68,6 @@ export default function About({ pageContent }) {
 export async function getStaticProps({ preview = null, locale }) {
   const pageContent = (await getPage("mission", locale)) || [];
   return {
-    props: { pageContent, preview },
+    props: { pageContent, locale },
   };
 }
