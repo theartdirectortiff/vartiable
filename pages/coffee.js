@@ -69,7 +69,7 @@ export default function Contact({ pageContent }) {
             {pageContent.story.content.Subtitle}
           </p>
           <div
-            className={` text-black dark:text-white grid sm:grid-cols-1 md:grid-cols-3 gap-8 md:gap-32 p-10 opacity-50 uppercase`}
+            className={` text-black dark:text-white grid sm:grid-cols-1 md:grid-cols-3 gap-4 md:gap-32 p-10 opacity-50 uppercase`}
           >
             <div className="flex md:flex-col justify-between">
               <Link target="_blank" href="https://www.instagram.com/vartiable/">
