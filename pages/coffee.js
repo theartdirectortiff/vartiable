@@ -60,7 +60,7 @@ export default function Contact({ pageContent }) {
         />
         <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
-      <div className="top-48 relative">
+      <div className="top-32 relative">
         <Container>
           <h1 className="dark:text-tournesol text-romance text-5xl text-center md:text-[6vw] uppercase leading-tight font-bold">
             {pageContent.story.content.Title}
