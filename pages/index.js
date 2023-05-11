@@ -49,7 +49,7 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
           ></source>
         </motion.video>
         <div className="h-screen relative mb-60 md:mb-32 z-40">
-          <div className="w-screen flex justify-center absolute bottom-0 bg-red-500">
+          <div className="w-screen flex justify-center absolute bottom-0">
             <Button href="/#start">
               {pageContent.story.content.HomeButton}
             </Button>
