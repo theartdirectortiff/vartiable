@@ -6,6 +6,7 @@ import Head from "next/head";
 import localFont from "next/font/local";
 import Footer from "@/components/footer";
 const courierNew = localFont({ src: "../../fonts/courier-new.ttf" });
+const scotch = localFont({ src: "../../fonts/Scotch.otf" });
 
 export default function Post({ post, preview }) {
   const router = useRouter();
@@ -29,7 +30,12 @@ export default function Post({ post, preview }) {
           <article>
             <section className="py-48" id="start">
               <Container>
-                <h1 className="dark:text-tournesol text-romance text-5xl md:text-[6vw] uppercase leading-tight font-bold">
+                <h1
+                  className={
+                    scotch.className +
+                    " dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+                  }
+                >
                   {post.content.ProjectName}
                 </h1>
                 {/* <pre>{JSON.stringify(post, 0, 4)}</pre> */}

@@ -1,20 +1,22 @@
 import Link from "next/link";
 
-export default function Button({ children, href, action }) {
+export default function Button({ children, href, action, ...props }) {
   return (
     <>
       {href ? (
         <Link
-          className="bg-midnight text-white relative py-3 px-5 inline-block border border-gray-500 after:content-[''] after:w-0 after:border-t-[8px] after:border-t-transparent after:border-r-[8px] after:border-r-white after:h-0 after:absolute after:bottom-1 after:right-1"
+          className="px-4 py-1 dark:bg-white bg-midnight dark:text-midnight text-white rounded-full flex gap-1 items-center hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white"
           href={href}
           scroll={false}
+          {...props}
         >
           {children}
         </Link>
       ) : (
         <button
-          className="bg-midnight text-white relative py-3 px-5 inline-block border border-gray-500 after:content-[''] after:w-0 after:border-t-[8px] after:border-t-transparent after:border-r-[8px] after:border-r-white after:h-0 after:absolute after:bottom-1 after:right-1"
+          className="px-4 py-1 dark:bg-white bg-midnight dark:text-midnight text-white rounded-full flex gap-1 items-center hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white"
           onClick={action}
+          {...props}
         >
           {children}
         </button>

@@ -5,6 +5,9 @@ import Head from "next/head";
 
 import Footer from "@/components/footer";
 
+import localFont from "next/font/local";
+const scotch = localFont({ src: "../../fonts/Scotch.otf" });
+
 export default function Post({ post, preview }) {
   const router = useRouter();
   // if (!router.isFallback && !post?.slug) {
@@ -28,7 +31,12 @@ export default function Post({ post, preview }) {
             <section className="h-screen">
               <Container>
                 <div className="flex flex-col justify-between h-screen py-32">
-                  <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
+                  <h1
+                    className={
+                      scotch.className +
+                      " dark:text-tournesol text-romance text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+                    }
+                  >
                     {post.content.Title}
                   </h1>
                   <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
@@ -53,7 +61,9 @@ export default function Post({ post, preview }) {
             <section className="py-32">
               <Container>
                 <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
-                  <h2 className="text-romance dark:text-tournesol text-6xl uppercase">
+                  <h2
+                    className={`${scotch.className} text-romance dark:text-tournesol text-6xl uppercase`}
+                  >
                     {post.content.DescriptionTitle}
                   </h2>
                   <div>

@@ -1,46 +1,16 @@
-import * as THREE from "three";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { OrbitControls } from "@react-three/drei";
-import { gsap } from "gsap";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Container from "@/components/container";
 import Button from "@/components/Button";
-import { getAllPosts } from "@/lib/api";
+import { getAllPosts, getPage } from "@/lib/api";
 import Link from "next/link";
 import Head from "next/head";
 
-function Scene({ objref }) {
-  useFrame(() => {
-    objref.current.rotation.y += 0.002;
-  });
+import localFont from "next/font/local";
+const scotch = localFont({ src: "../../fonts/Scotch.otf" });
 
-  const gltf = useLoader(
-    GLTFLoader,
-    "/models/abandoned_vr_gallery_for_design__street_art/scene.gltf"
-  );
-
-  return (
-    <>
-      <ambientLight intensity={0.65} />
-      <Suspense fallback={<span>Loading...</span>}>
-        <primitive
-          ref={objref}
-          position={[0, -100, 0]}
-          scale={[1, 1, 1]}
-          object={gltf.scene}
-          receiveShadow
-          castShadow
-        />
-      </Suspense>
-    </>
-  );
-}
-
-export default function Projects({ allPosts, locale }) {
+export default function Projects({ allPosts, pageContent, locale }) {
   const [projectsList, setProjectsList] = useState(false);
-  const tl = gsap.timeline({ paused: true });
 
   // Use that instead of a not reachable in function scope arr
   const [random_projects_state, set_random_projects_state] = useState([]);
@@ -89,17 +59,21 @@ export default function Projects({ allPosts, locale }) {
         />
         <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
-      <Canvas>
-        <Scene objref={macObjRef} scale={1} />
-        <OrbitControls
-          makeDefault
-          enableZoom={false}
-          enablePan={false}
-          enableDamping
-          maxPolarAngle={Math.PI / 2}
-          minAzimuthAngle={-Math.PI / 4}
-        />
-      </Canvas>
+      <motion.video
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3 }}
+        className="w-screen h-screen absolute z-0 object-cover"
+        autoPlay
+        muted
+        playsInline
+        loop
+      >
+        <source
+          src={pageContent.story.content.Video.filename}
+          type="video/mp4"
+        ></source>
+      </motion.video>
       <div
         ref={dom}
         id="cacs"
@@ -184,7 +158,7 @@ export default function Projects({ allPosts, locale }) {
         }}
       >
         <div className="border-b border-midnight p-8 flex justify-between items-center">
-          <h2 className="text-3xl uppercase">
+          <h2 className={`${scotch.className} text-3xl uppercase`}>
             {locale === "fr" ? "Liste de projets" : "Projects list"}
           </h2>
           <div className="flex gap-2 items-center">
@@ -279,7 +253,8 @@ export default function Projects({ allPosts, locale }) {
 
 export async function getStaticProps({ preview = null, locale }) {
   const allPosts = (await getAllPosts(locale)) || [];
+  const pageContent = (await getPage("page_projets", locale)) || [];
   return {
-    props: { allPosts, locale },
+    props: { allPosts, pageContent, locale },
   };
 }

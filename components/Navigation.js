@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import localFont from "next/font/local";
 import { Player } from "@lottiefiles/react-lottie-player";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
 
 export default function Navigation() {
   const [menu, setMenu] = useState(false);
@@ -81,6 +82,7 @@ export default function Navigation() {
         ref={audioRef}
         src="audio/website_audio_light.mp3"
         onTimeUpdate={handleTimeUpdate}
+        loop
       />
       <Container>
         <div className="flex items-center justify-between w-full">
@@ -233,9 +235,9 @@ export default function Navigation() {
               closed: {
                 right: "-100%",
                 transition: {
-                  animationDelay: 1,
                   type: "tween",
                   ease: [0.4, 0, 0.2, 1],
+                  //duration: 1,
                 },
               },
               open: {
@@ -243,6 +245,7 @@ export default function Navigation() {
                 transition: {
                   type: "tween",
                   ease: [0.4, 0, 0.2, 1],
+                  //duration: 1,
                 },
               },
             }}
@@ -324,7 +327,7 @@ export default function Navigation() {
                   Fr / En
                 </button>
               </div>
-              <h2 className="text-5xl uppercase">
+              <h2 className={`${scotch.className} text-7xl uppercase`}>
                 {locale === "fr"
                   ? "Naviguez à travers notre univers"
                   : "Navigate through our world"}

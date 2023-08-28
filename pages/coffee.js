@@ -7,6 +7,9 @@ import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import localFont from "next/font/local";
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
+
 export default function Contact({ pageContent }) {
   const [contactForm, setContactForm] = useState(false);
   const [error, setError] = useState(false);
@@ -62,7 +65,12 @@ export default function Contact({ pageContent }) {
       </Head>
       <div className="top-32 relative">
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-5xl text-center md:text-[6vw] uppercase leading-tight font-bold">
+          <h1
+            className={
+              scotch.className +
+              " dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+            }
+          >
             {pageContent.story.content.Title}
           </h1>
           <p className="text-center opacity-50">
@@ -128,10 +136,10 @@ export default function Contact({ pageContent }) {
                 },
               },
             }}
-            className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-0 md:m-12 border border-midnight"
+            className="fixed bottom-0 left-0 right-0 dark:bg-white dark:text-midnight text-white bg-midnight m-0 md:m-12 rounded-lg"
           >
-            <div className="border-b border-midnight p-8 flex justify-between items-center">
-              <h2 className="text-3xl uppercase">
+            <div className="p-8 flex justify-between items-center">
+              <h2 className={`${scotch.className} text-3xl uppercase`}>
                 {pageContent.story.content.FormTitle}
               </h2>
               <div className="flex gap-2 items-center">
@@ -202,7 +210,7 @@ export default function Contact({ pageContent }) {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="w-full grid grid-cols-1 gap-4 p-8"
+              className="w-full grid grid-cols-1 gap-4 px-8 pb-8"
             >
               <div className="w-full grid grid-cols-2 gap-4">
                 <input

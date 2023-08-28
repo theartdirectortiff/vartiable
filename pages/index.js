@@ -11,6 +11,7 @@ import { useTheme } from "next-themes";
 import localFont from "next/font/local";
 import Image from "next/image";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
 
 export default function Index({ allPosts, pageContent, allServices, locale }) {
   const [sliderWidth, setsliderWidth] = useState();
@@ -50,7 +51,10 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
         </motion.video>
         <div className="h-screen relative mb-60 md:mb-32 z-40">
           <div className="w-screen flex justify-center absolute bottom-0">
-            <Button href="/#start">
+            <Button
+              href="/#start"
+              className="py-5 px-7 dark:bg-white dark:text-black bg-black text-white rounded-full hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white"
+            >
               {pageContent.story.content.HomeButton}
             </Button>
           </div>
@@ -58,23 +62,21 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
       </section>
       <section className="py-32 w-screen overflow-hidden" id="start">
         <Container>
-          <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
-            <h2 className="dark:text-tournesol text-romance text-[13vw] md:text-6xl uppercase font-medium leading-tight">
+          <div>
+            <h2
+              className={
+                scotch.className +
+                " dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+              }
+            >
               {pageContent.story.content.ProjectSectionTitle}
             </h2>
-            <div className="flex flex-col gap-4 items-start">
-              <p className="leading-relaxed">
-                {pageContent.story.content.ProjectSectionParagraph}
-              </p>
-              <Button href="/projets">
-                {pageContent.story.content.ProjectButton}
-              </Button>
-            </div>
           </div>
           <div className="pt-20">
             <motion.div ref={slider} className="cursor-grab">
               <motion.div
                 drag="x"
+                dragMomentum={false}
                 dragConstraints={{ right: 0, left: -sliderWidth }}
                 className="flex gap-4"
               >
@@ -104,12 +106,30 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
             </motion.div>
           </div>
         </Container>
-      </section>
-      <section className="py-32" id="services">
+
         <Container>
-          <h1 className="dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[6vw] uppercase leading-tight">
+          <div className="flex justify-end">
+            <div className="sm:w-full md:w-[40%] py-36 flex flex-col gap-5 items-start">
+              <p className="indent-24">
+                {pageContent.story.content.ProjectSectionParagraph}
+              </p>
+              <Button href="/projets">
+                {pageContent.story.content.ProjectButton}
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section id="services" className="pb-32">
+        <Container>
+          <h2
+            className={
+              scotch.className +
+              " dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[10vw] uppercase leading-none"
+            }
+          >
             {pageContent.story.content.ServiceSectionTitle}
-          </h1>
+          </h2>
         </Container>
         <div className="pt-20">
           <Container>

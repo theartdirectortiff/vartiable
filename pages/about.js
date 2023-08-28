@@ -5,6 +5,7 @@ import { getPage } from "@/lib/api";
 import localFont from "next/font/local";
 import Head from "next/head";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
 
 export default function About({ pageContent, locale }) {
   return (
@@ -20,7 +21,9 @@ export default function About({ pageContent, locale }) {
       <section className="h-screen">
         <Container>
           <div className="flex flex-col justify-between h-screen py-32">
-            <h1 className="dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight font-bold">
+            <h1
+              className={`${scotch.className} dark:text-tournesol text-romance text-4xl md:text-[6vw] uppercase leading-tight`}
+            >
               {pageContent.story.content.Title}
             </h1>
             <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1">
@@ -47,11 +50,15 @@ export default function About({ pageContent, locale }) {
       <section className="py-32">
         <Container>
           <div className="grid gap-12 md:grid-cols-2 sm:grid-cols-1 py-36">
-            <h2 className="text-romance dark:text-tournesol text-6xl uppercase">
+            <h2
+              className={`${scotch.className} text-romance dark:text-tournesol text-6xl uppercase`}
+            >
               {locale === "fr" ? "Notre mission" : "Our mission"}
             </h2>
             <div>
-              <p>{pageContent.story.content.LongDescription}</p>
+              <p className="indent-24">
+                {pageContent.story.content.LongDescription}
+              </p>
             </div>
           </div>
         </Container>

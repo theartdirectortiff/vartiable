@@ -4,6 +4,7 @@ import Container from "./container";
 import localFont from "next/font/local";
 import Button from "./Button";
 const courierNew = localFont({ src: "../fonts/courier-new.ttf" });
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
 
 export default function Footer({ title, image, cta }) {
   return (
@@ -39,9 +40,16 @@ export default function Footer({ title, image, cta }) {
             <Link href="tel:0791571767">+41791571767</Link>
           </div>
         </div>
-        <h1 className="text-white text-center font-semibold text-5xl md:text-[5vw] py-16 uppercase leading-tight w-full md:w-5/6 m-auto">
-          {title}
-        </h1>
+        <div className="my-20">
+          <h3
+            className={
+              scotch.className +
+              " pt-20 md:pt-0 text-white text-center text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+            }
+          >
+            {title}
+          </h3>
+        </div>
         <div className="w-4/5 md:w-2/4 h-96 m-auto mt-10 rounded-tl-3xl rounded-tr-3xl overflow-hidden relative flex justify-center">
           <img
             src={image}

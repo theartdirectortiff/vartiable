@@ -2,6 +2,9 @@ import Button from "@/components/Button";
 import Container from "@/components/container";
 import Head from "next/head";
 
+import localFont from "next/font/local";
+const scotch = localFont({ src: "../fonts/Scotch.otf" });
+
 export default function Page() {
   return (
     <Container>
@@ -14,10 +17,15 @@ export default function Page() {
         <link rel="icon" href="/images/favicon.png" type="image/png" />
       </Head>
       <section className="h-screen flex flex-col items-center justify-center gap-8">
-        <h1 className="dark:text-tournesol text-romance text-5xl text-center md:text-[6vw] uppercase leading-tight font-bold">
+        <h1
+          className={
+            scotch.className +
+            " dark:text-tournesol text-romance text-center text-[13vw] font-medium  md:text-[8vw] uppercase leading-none"
+          }
+        >
           This page does not exist
         </h1>
-        <Button>Back to Home</Button>
+        <Button href="/">Back to Home</Button>
       </section>
     </Container>
   );
