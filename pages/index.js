@@ -106,20 +106,19 @@ export default function Index({ allPosts, pageContent, allServices, locale }) {
             </motion.div>
           </div>
         </Container>
-
-        <Container>
-          <div className="flex justify-end">
-            <div className="sm:w-full md:w-[40%] py-36 flex flex-col gap-5 items-start">
-              <p className="indent-24">
-                {pageContent.story.content.ProjectSectionParagraph}
-              </p>
-              <Button href="/projets">
-                {pageContent.story.content.ProjectButton}
-              </Button>
-            </div>
-          </div>
-        </Container>
       </section>
+      <Container>
+        <div className="flex justify-end">
+          <div className="sm:w-full md:w-[40%] pb-36 flex flex-col gap-5 items-start">
+            <p className="indent-24">
+              {pageContent.story.content.ProjectSectionParagraph}
+            </p>
+            <Button href="/projets">
+              {pageContent.story.content.ProjectButton}
+            </Button>
+          </div>
+        </div>
+      </Container>
       <section id="services" className="pb-32">
         <Container>
           <h2
